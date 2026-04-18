@@ -1,0 +1,2893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justin's Card Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0EEE9;--surface:#FFFFFF;--border:#E0DDD6;--dark:#18181F;
+  --gold:#D4930F;--green:#166534;--green-l:#DCFCE7;--red:#9F1239;--red-l:#FFE4E6;
+  --blue:#1E40AF;--blue-l:#DBEAFE;--amber-l:#FEF3C7;--amber:#92400E;
+  --muted:#A09D96;--sub:#6B6860;--text:#18181F;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+nav{background:var(--dark);padding:0 48px;height:80px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-left{flex:1}
+.logo{display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:opacity .15s;gap:1px}
+.logo:hover{opacity:.8}
+.logo-main{font-size:26px;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:#FFFFFF;display:flex;align-items:center;gap:0}
+.logo-card{color:#F0B429}
+.logo-sep{display:inline-block;width:5px;height:5px;border-radius:50%;background:#F0B429;margin:0 10px;vertical-align:middle;position:relative;top:-1px;box-shadow:0 0 8px #F0B429}
+.logo-under{font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#888;margin-top:1px}
+.nav-right{flex:1;display:flex;justify-content:flex-end}
+.live-badge{font-size:11px;color:#555;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);padding:4px 12px;border-radius:20px}
+.tab-bar{background:var(--dark);padding:0 48px;display:flex;align-items:flex-end;gap:4px;border-bottom:2px solid rgba(255,255,255,0.08)}
+.tab-btn{font-size:13px;font-weight:700;letter-spacing:1.5px;padding:14px 32px;border:none;background:none;color:#666;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;border-radius:6px 6px 0 0;text-transform:uppercase}
+.tab-btn:hover{color:#CCC;background:rgba(255,255,255,0.05)}
+.tab-btn.active{color:#FFFFFF;border-bottom-color:#F0B429;background:rgba(255,255,255,0.06)}
+#tabAllCards.active{border-bottom-color:#34D399;color:#34D399}
+#tabForSale.active{border-bottom-color:#60A5FA;color:#60A5FA}
+#tabSold.active{border-bottom-color:#A78BFA;color:#A78BFA}
+.tab-badge{display:inline-block;background:#F0B429;color:#000;font-size:10px;font-weight:800;padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle;line-height:1.4}
+.kpis{background:var(--dark);display:grid;grid-template-columns:auto repeat(4,1fr)}
+.kpi-ctx-box{padding:20px 28px;border-right:1px solid rgba(255,255,255,0.06);min-width:120px}
+.kpi-ctx-val{font-size:28px;font-weight:800;color:#fff;letter-spacing:-1px;margin-top:4px}
+.kpi{padding:20px 48px;border-right:1px solid rgba(255,255,255,0.06)}
+.kpi:last-child{border-right:none}
+.kpi-l{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#444;margin-bottom:6px}
+.kpi-v{font-size:32px;font-weight:800;color:#fff;letter-spacing:-1px}
+.kpi-v.gold{color:#F0B429}.kpi-v.grn{color:#4ADE80}.kpi-v.red{color:#FB7185}
+.view{padding:32px 40px;display:none}
+.view.active{display:block}
+.bc{display:flex;align-items:center;gap:8px;margin-bottom:28px;font-size:14px;flex-wrap:wrap}
+.bc-item{color:var(--sub);cursor:pointer;transition:color .15s;font-weight:600}
+.bc-item:hover{color:var(--text)}
+.bc-sep{color:var(--muted)}
+.bc-cur{color:var(--text);font-weight:800}
+.sec-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.sport-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.sport-grid{grid-template-columns:repeat(2,1fr)}}
+.sport-tile{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:0;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:180px}
+.sport-tile:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,.12);border-color:#C8C4BC}
+.st-bar{height:4px;width:100%;background:var(--tc,#CCC)}
+.st-header{padding:22px 26px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.st-header-left{display:flex;align-items:center;gap:14px}
+.st-icon{font-size:28px;line-height:1}
+.st-name{font-size:18px;font-weight:800;color:var(--dark);letter-spacing:-.3px}
+.st-pill{font-size:11px;font-weight:600;color:var(--muted);margin-top:2px}
+.st-arrow{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted);transition:all .2s;flex-shrink:0}
+.sport-tile:hover .st-arrow{background:var(--dark);border-color:var(--dark);color:#fff}
+.st-body{padding:22px 26px 24px;display:flex;align-items:flex-end;justify-content:space-between}
+.st-val{font-size:38px;font-weight:800;color:var(--dark);line-height:1;letter-spacing:-1.5px}
+.st-gain{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;padding:7px 16px;border-radius:20px;margin-bottom:4px}
+.st-gain.up{color:var(--green);background:var(--green-l)}.st-gain.dn{color:var(--red);background:var(--red-l)}
+.st-ret{font-size:11px;font-weight:700}
+.st-ret.up{color:var(--green)}.st-ret.dn{color:var(--red)}
+.player-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.player-tile{background:var(--surface);border:1.5px solid var(--border);border-left:4px solid var(--tc,var(--gold));border-radius:14px;padding:0;cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative;animation:up .25s both;overflow:hidden}
+.player-tile:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.12)}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.pt-accent{display:none}
+.pt-inner{padding:16px 18px 14px}
+.pt-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:6px;min-width:0}
+.pt-name{font-size:14px;font-weight:800;line-height:1.3;color:var(--dark);min-width:0;word-break:break-word;white-space:normal}
+.pt-count{font-size:10px;font-weight:700;color:rgba(255,255,255,0.95);background:var(--tc,var(--gold));padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.pt-val{font-size:24px;font-weight:800;color:var(--dark);margin-bottom:6px;line-height:1;letter-spacing:-0.5px}
+.pt-gain{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;margin-bottom:0}
+.pt-gain.up{color:var(--green);background:var(--green-l)}.pt-gain.dn{color:var(--red);background:var(--red-l)}
+.pt-bar-wrap{margin-top:12px}
+.pt-bar-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.pt-bar-lbl-txt{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.pt-bar-lbl-pct{font-size:9px;font-weight:700;color:var(--tc,var(--gold))}
+.pt-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.pt-bar-fill{height:100%;border-radius:2px;background:var(--tc,var(--gold))}
+.pt-arrow{position:absolute;bottom:14px;right:14px;width:24px;height:24px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);opacity:0;transition:all .15s}
+.player-tile:hover .pt-arrow{opacity:1;background:var(--tc,var(--gold));border-color:var(--tc,var(--gold));color:#fff}
+.pt-cond-row{display:flex;align-items:center;gap:4px;margin-top:8px;flex-wrap:wrap}
+.pt-cond-tag{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;color:#fff;letter-spacing:.3px}
+.pt-cond-tag.gem{background:#065F46}.pt-cond-tag.mint{background:#1D4ED8}.pt-cond-tag.nm{background:#6D28D9}
+.pt-cond-tag.mid{background:#B45309}.pt-cond-tag.low{background:#9F1239}.pt-cond-tag.raw{background:#64748B}
+.toolbar{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:200px;max-width:360px;background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-family:'Manrope',sans-serif;font-size:14px;padding:10px 16px;border-radius:8px;outline:none;transition:border-color .15s}
+.search:focus{border-color:var(--dark)}.search::placeholder{color:var(--muted)}
+.sort{background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-family:'Manrope',sans-serif;font-size:14px;padding:10px 14px;border-radius:8px;outline:none;cursor:pointer}
+.count-lbl{font-size:13px;color:var(--muted);margin-left:auto;font-weight:500}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+/* ── SHOW VIEW (simplified tiles for card shows) ── */
+.show-mode-btn{background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;padding:9px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:6px}
+.show-mode-btn.active{background:#22C55E;color:#fff;border-color:#22C55E}
+body.dark .show-mode-btn{background:var(--surface);color:var(--text);border-color:var(--border)}
+body.dark .show-mode-btn.active{background:#22C55E;color:#fff;border-color:#22C55E}
+/* Wider tile minimum so numbers don't wrap — fewer columns, more room */
+.card-grid.show-mode{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+/* Strip everything except the essentials */
+.card-grid.show-mode .c{border-radius:14px;border-width:2px;animation:none}
+.card-grid.show-mode .c:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.1)}
+.card-grid.show-mode .c-cert-simple,
+.card-grid.show-mode .c-foot,
+.card-grid.show-mode .c-ebay-block,
+.card-grid.show-mode .c-pricing-grid,
+.card-grid.show-mode .c-val-row,
+.card-grid.show-mode .sell-urgency-banner{display:none}
+/* Thicker stripe for sport color at a glance */
+.card-grid.show-mode .c-stripe{height:6px}
+/* Top section: name + set + condition pill */
+.card-grid.show-mode .c-top{padding:14px 16px 10px;border-bottom:none;gap:10px;align-items:flex-start}
+.card-grid.show-mode .c-player-name{font-size:17px;font-weight:800;letter-spacing:-0.3px;max-width:none;white-space:normal;word-break:break-word;line-height:1.2}
+.card-grid.show-mode .c-set{font-size:12px;color:var(--sub);font-weight:500;white-space:normal;max-width:none;line-height:1.3;margin-top:3px}
+.card-grid.show-mode .cond{font-size:11px;font-weight:800;padding:4px 10px;flex-shrink:0}
+.card-grid.show-mode .c-show-inline{display:none!important}
+.card-grid.show-mode .c-outlook-dot{display:none}
+.card-grid.show-mode .c-source-badge{display:none}
+/* Body: SHOW price + FLOOR block, with cost basis + gain% strip below */
+.card-grid.show-mode .c-body{padding:0 16px 14px}
+.card-grid.show-mode .c-show-pricing-highlight{margin-bottom:10px;padding:12px 0 0;border-top:1px solid var(--border);border-bottom:none;grid-template-columns:1fr 1fr;gap:8px}
+.card-grid.show-mode .c-show-price-big{padding:10px 12px;border-radius:10px}
+.card-grid.show-mode .c-floor-price-big{padding:10px 12px;border-radius:10px}
+.card-grid.show-mode .c-show-price-val{font-size:24px;font-weight:800;letter-spacing:-0.8px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-grid.show-mode .c-floor-price-val{font-size:20px;font-weight:800;letter-spacing:-0.5px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-grid.show-mode .c-stat-l{font-size:9px;font-weight:800;letter-spacing:1.2px}
+/* show-mode quick stats strip — paid + gain */
+.card-grid.show-mode .show-quick-stats{display:flex;justify-content:space-between;align-items:center;gap:8px;padding-top:4px;border-top:1px dashed var(--border);margin-top:6px}
+.show-quick-stats{display:none}
+.show-quick-stat{display:flex;align-items:baseline;gap:5px;font-size:11px}
+.show-quick-stat-lbl{font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.show-quick-stat-val{font-size:12px;font-weight:700;color:var(--sub)}
+.show-quick-gain{font-size:12px;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:0.3px}
+.show-quick-gain.up{color:var(--green);background:var(--green-l)}
+.show-quick-gain.dn{color:var(--red);background:var(--red-l)}
+/* hide inline show-price el entirely (used elsewhere; not in show view) */
+.c-show-inline{display:none}
+.c-show-inline-price{font-size:22px;font-weight:800;color:var(--green);white-space:nowrap;letter-spacing:-0.5px;line-height:1}
+.c-show-inline-floor{font-size:12px;font-weight:800;color:var(--amber);white-space:nowrap;background:var(--amber-l);padding:3px 10px;border-radius:20px;letter-spacing:0.3px}
+.c-show-inline-price-col{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+/* outlook indicator dot (used on normal cards, not show mode) */
+.c-outlook-dot{display:none}
+.c-outlook-dot.sb{background:var(--green)}
+.c-outlook-dot.h{background:var(--blue)}
+.c-outlook-dot.w{background:var(--amber)}
+.c-outlook-dot.s{background:var(--red)}
+/* mobile: single column */
+@media(max-width:640px){
+  .card-grid.show-mode{grid-template-columns:1fr;gap:12px}
+  .card-grid.show-mode .c-show-price-val{font-size:28px}
+  .card-grid.show-mode .c-player-name{font-size:17px}
+}
+/* sold-at-show badge on card */
+.c-sold-show-badge{display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(34,197,94,0.08);border:2px solid #22C55E;border-radius:14px;pointer-events:none;z-index:2}
+.c-sold-show-label{position:absolute;top:8px;right:8px;background:#22C55E;color:#fff;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.c.sold-at-show{position:relative;opacity:0.65}
+.c.sold-at-show .c-sold-show-badge{display:block}
+/* louder below-floor warning */
+.deal-floor-warn{display:none;background:rgba(251,113,133,0.15);border:1px solid rgba(251,113,133,0.4);border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:13px;font-weight:700;color:#FB7185;text-align:center}
+.deal-floor-warn.show{display:block}
+/* ── SELL urgency on cards ── */
+.c.outlook-sell{border-color:#F43F5E!important;border-width:2px!important}
+.c.outlook-sell .c-stripe{height:6px}
+.c.outlook-sell .c-foot{background:#FFF0F3}
+body.dark .c.outlook-sell .c-foot{background:rgba(244,63,94,0.1)}
+.sell-urgency-banner{background:#F43F5E;color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 16px;text-align:center}
+.player-tile.outlook-sell{border-color:#F43F5E!important;border-left-color:#F43F5E!important}
+.player-tile.outlook-sell .pt-inner::before{content:'MOVE IT';display:block;background:#F43F5E;color:#fff;font-size:8px;font-weight:800;letter-spacing:2px;padding:3px 8px;margin:-16px -18px 10px;text-align:center}
+/* scan btn in for-sale toolbar */
+.toolbar-scan-btn{background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-family:'Manrope',sans-serif;font-size:18px;padding:8px 12px;border-radius:8px;cursor:pointer;transition:opacity .15s;line-height:1;flex-shrink:0}
+.toolbar-scan-btn:hover{opacity:.7}
+/* customer screen per-card price */
+.dp-card-price{font-size:15px;font-weight:800;color:#F0B429;margin-top:4px}
+/* ── eBay ASK PRICE BLOCK (on card) ── */
+.c-ebay-block{padding:12px 16px 14px;border-top:1px solid var(--border);background:linear-gradient(180deg,rgba(229,92,0,0.04),rgba(229,92,0,0.015));display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+body.dark .c-ebay-block{background:linear-gradient(180deg,rgba(229,92,0,0.08),rgba(229,92,0,0.03))}
+.c-ebay-left{display:flex;align-items:center;gap:8px;min-width:0}
+.c-ebay-icon{width:22px;height:22px;border-radius:4px;background:#E53238;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:-0.5px}
+.c-ebay-label{font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);line-height:1.2}
+.c-ebay-sublabel{font-size:10px;color:var(--sub);font-weight:500;margin-top:1px;line-height:1.2}
+.c-ebay-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.c-ebay-ask{font-size:20px;font-weight:800;color:#E53238;letter-spacing:-0.5px;line-height:1}
+body.dark .c-ebay-ask{color:#FB7185}
+.c-ebay-net{font-size:10px;color:var(--sub);font-weight:600}
+.c-ebay-calc-btn{background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer;padding:4px 6px;transition:color .15s;line-height:1}
+.c-ebay-calc-btn:hover{color:var(--dark)}
+/* show-mode list: tuck a tiny ebay ask in */
+.card-grid.show-mode .c-ebay-block{display:none}
+/* Deal-builder mode: hide eBay ribbon to avoid tap-target conflict */
+.deal-mode .c-ebay-block{display:none}
+/* ── eBay CALCULATOR MODAL ── */
+.ebay-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.ebay-modal.open{display:flex}
+.ebay-modal-box{background:var(--surface);border-radius:20px;padding:0;max-width:480px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.35);border:1px solid var(--border)}
+.ebay-modal-header{padding:22px 24px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;background:var(--surface);z-index:2;border-radius:20px 20px 0 0}
+.ebay-modal-title-wrap{display:flex;align-items:center;gap:10px;min-width:0}
+.ebay-modal-icon{width:32px;height:32px;border-radius:6px;background:#E53238;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:-0.5px}
+.ebay-modal-title{font-size:16px;font-weight:800;color:var(--dark);letter-spacing:-0.3px}
+.ebay-modal-sub{font-size:11px;color:var(--sub);font-weight:500;margin-top:2px}
+.ebay-modal-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;padding:0 4px;line-height:1;transition:color .15s}
+.ebay-modal-close:hover{color:var(--dark)}
+.ebay-modal-body{padding:22px 24px 24px}
+.ebay-card-info{background:var(--bg);border-radius:10px;padding:12px 14px;margin-bottom:18px}
+.ebay-card-name{font-size:14px;font-weight:800;color:var(--dark);margin-bottom:2px}
+.ebay-card-set{font-size:11px;color:var(--sub);font-weight:500}
+.ebay-card-val{font-size:22px;font-weight:800;color:var(--dark);letter-spacing:-0.5px;margin-top:6px;line-height:1}
+.ebay-card-val-lbl{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.ebay-input-row{margin-bottom:14px}
+.ebay-input-label{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ebay-input-hint{font-size:10px;color:var(--sub);font-weight:500;text-transform:none;letter-spacing:0}
+.ebay-input-wrap{position:relative}
+.ebay-input-prefix{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;font-weight:700;pointer-events:none}
+.ebay-input{width:100%;background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;padding:11px 12px 11px 26px;border-radius:8px;outline:none;transition:border-color .15s;-moz-appearance:textfield}
+.ebay-input::-webkit-outer-spin-button,.ebay-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.ebay-input:focus{border-color:var(--dark)}
+/* result card */
+.ebay-result{background:linear-gradient(135deg,#E53238,#C8102E);color:#fff;border-radius:14px;padding:20px 22px;margin-top:6px;box-shadow:0 8px 24px rgba(229,50,56,0.25)}
+.ebay-result-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;opacity:0.85;margin-bottom:4px}
+.ebay-result-val{font-size:40px;font-weight:800;letter-spacing:-1.5px;line-height:1}
+.ebay-result-sub{font-size:12px;font-weight:600;opacity:0.88;margin-top:6px}
+.ebay-breakdown{margin-top:18px;background:var(--bg);border-radius:10px;padding:14px 16px}
+.ebay-breakdown-title{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.ebay-breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:13px}
+.ebay-breakdown-row.total{border-top:1px solid var(--border);margin-top:6px;padding-top:10px;font-weight:800;font-size:14px}
+.ebay-breakdown-lbl{color:var(--sub);font-weight:600}
+.ebay-breakdown-val{color:var(--text);font-weight:700;font-family:ui-monospace,monospace}
+.ebay-breakdown-val.red{color:#E53238}
+.ebay-breakdown-val.green{color:var(--green)}
+body.dark .ebay-breakdown-val.red{color:#FB7185}
+/* scenario presets */
+.ebay-scenarios{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;margin-bottom:16px}
+.ebay-scenario-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:10px 8px;cursor:pointer;transition:all .15s;font-family:'Manrope',sans-serif;text-align:center}
+.ebay-scenario-btn:hover{border-color:var(--dark)}
+.ebay-scenario-btn.active{border-color:#E53238;background:rgba(229,50,56,0.08)}
+.ebay-scenario-lbl{font-size:10px;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.ebay-scenario-btn.active .ebay-scenario-lbl{color:#E53238}
+.ebay-scenario-val{font-size:14px;font-weight:800;color:var(--text)}
+.ebay-settings-btn{width:100%;background:none;border:1px dashed var(--border);color:var(--muted);font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;padding:10px;border-radius:8px;cursor:pointer;margin-top:12px;transition:all .15s}
+.ebay-settings-btn:hover{border-color:var(--dark);color:var(--dark)}
+/* ── eBay SETTINGS PANEL ── */
+.ebay-settings-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:16px}
+.ebay-settings-panel.open{display:block}
+.ebay-settings-title{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.ebay-settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ebay-settings-grid .ebay-input-row{margin-bottom:0}
+.ebay-settings-reset{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:8px 0 0;font-family:'Manrope',sans-serif;font-weight:600;text-decoration:underline;margin-top:6px}
+.ebay-settings-reset:hover{color:var(--red)}
+@media(max-width:520px){
+  .ebay-modal-box{max-height:96vh;border-radius:16px}
+  .ebay-result-val{font-size:34px}
+  .ebay-scenarios{grid-template-columns:1fr 1fr 1fr}
+}
+.c{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .18s,box-shadow .18s;animation:up .28s both;min-width:0;word-break:break-word}
+.c:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.1)}
+.c-stripe{height:5px}
+.c-top{padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--border);gap:8px}
+.c-player-name{font-size:14px;font-weight:800;color:var(--dark);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px}
+.c-set{font-size:12px;font-weight:500;color:var(--sub);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px}
+.cond{font-size:10px;font-weight:800;letter-spacing:.5px;padding:3px 9px;border-radius:4px;color:#fff;white-space:nowrap;flex-shrink:0}
+.gem{background:#065F46}.mint{background:#1D4ED8}.nm{background:#6D28D9}.mid{background:#B45309}.low{background:#9F1239}.raw{background:#4B5563}
+.c-body{padding:18px 16px 14px}
+.c-val-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px}
+.c-val-lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.c-val{font-size:30px;font-weight:800;color:var(--dark);line-height:1}
+.c-gain-block{text-align:right;padding-bottom:2px}
+.c-gain{font-size:18px;font-weight:800}
+.c-gain.up{color:var(--green)}.c-gain.dn{color:var(--red)}
+.c-gpct{font-size:12px;font-weight:600;margin-top:2px}
+.c-gpct.up{color:var(--green)}.c-gpct.dn{color:var(--red)}
+.c-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.c-stat{background:var(--bg);border-radius:8px;padding:10px 12px}
+.c-stat-l{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.c-stat-v{font-size:15px;font-weight:700;color:var(--dark)}
+.c-section-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.c-proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.c-pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.c-pricing-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+.c-stat-v.amber{color:var(--amber)}
+.c-stat-v.green{color:var(--green)}
+.c-stat-v.blue{color:var(--blue)}
+.c-foot{padding:14px 16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:#FAFAF8}
+.ol{font-size:12px;font-weight:800;letter-spacing:.3px;padding:6px 14px;border-radius:20px}
+.ol-sb{background:var(--green-l);color:var(--green)}.ol-h{background:var(--blue-l);color:var(--blue)}
+.ol-w{background:var(--amber-l);color:var(--amber)}.ol-s{background:var(--red-l);color:var(--red)}
+.c-proj{font-size:14px;color:var(--sub);font-weight:700}
+.c-proj b{font-weight:800;color:var(--green);font-size:15px}.c-proj b.neg{color:var(--red)}
+/* CERT SECTION */
+.c-cert-simple{padding:10px 16px;border-top:1px solid var(--border);background:#FAFAF8;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+body.dark .c-cert-simple{background:#0F1015}
+.c-cert-simple-row{display:flex;align-items:center;gap:8px}
+.c-cert-simple-links{display:flex;align-items:center;gap:12px}
+.c-serial-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.c-serial-num{font-size:11px;font-weight:600;color:var(--sub);font-family:monospace;letter-spacing:.8px}
+.c-cert-grader-badge{font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--blue-l);color:var(--blue)}
+.c-cert-lookup{font-size:10px;font-weight:700;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:3px;transition:opacity .15s;white-space:nowrap}
+.c-cert-lookup:hover{opacity:.7}
+/* SOURCE BADGE for All Cards view */
+.c-source-badge{font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-left:6px}
+.c-source-coll{background:var(--green-l);color:var(--green)}
+.c-source-sale{background:#DBEAFE;color:#1E40AF}
+/* DARK MODE */
+body.dark{--bg:#0E0F14;--surface:#16171E;--border:rgba(255,255,255,0.08);--dark:#FFFFFF;--gold:#F0B429;--green:#22C55E;--green-l:rgba(34,197,94,0.15);--red:#F43F5E;--red-l:rgba(244,63,94,0.15);--blue:#60A5FA;--blue-l:rgba(96,165,250,0.15);--amber:#FBBF24;--amber-l:rgba(251,191,36,0.15);--muted:#4A4B5A;--sub:#8889A0;--text:#EEEEF5}
+body.dark nav{background:#0A0A0F;border-bottom:1px solid rgba(255,255,255,0.05)}
+body.dark .tab-bar{background:#0A0A0F}
+body.dark .kpis{background:#0A0A0F}
+body.dark .kpi-l{color:#333}
+body.dark .kpi-v{color:#fff}
+body.dark .logo-under{color:#444}
+body.dark .c-foot{background:#0F1015}
+body.dark .global-search,body.dark .search,body.dark .sort{background:#16171E;border-color:rgba(255,255,255,0.08);color:#EEEEF5}
+body.dark .st-pill{color:#8889A0;background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08)}
+.dark-toggle{width:40px;height:22px;border-radius:11px;border:none;cursor:pointer;background:rgba(255,255,255,0.1);position:relative;transition:background .2s;flex-shrink:0;margin-left:12px}
+.dark-toggle::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#888;transition:transform .2s,background .2s}
+body.dark .dark-toggle{background:rgba(240,180,41,0.3)}
+body.dark .dark-toggle::after{transform:translateX(18px);background:#F0B429}
+.dark-toggle-wrap{display:flex;align-items:center;gap:8px}
+.dark-toggle-icon{font-size:14px;color:#555;transition:color .2s}
+body.dark .dark-toggle-icon{color:#888}
+
+.global-search-wrap{position:relative;margin-bottom:28px}
+.global-search{width:100%;background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-family:'Manrope',sans-serif;font-size:15px;padding:14px 20px;border-radius:12px;outline:none;transition:border-color .15s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.global-search:focus{border-color:var(--dark);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.global-search::placeholder{color:var(--muted)}
+.global-results{position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:50;overflow:hidden;display:none}
+.global-results.open{display:block}
+.gr-item{padding:12px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s}
+.gr-item:last-child{border-bottom:none}
+.gr-item:hover{background:var(--bg)}
+.gr-left{display:flex;align-items:center;gap:12px}
+.gr-icon{font-size:18px}
+.gr-name{font-size:14px;font-weight:700;color:var(--dark)}
+.gr-set{font-size:12px;color:var(--sub);margin-top:1px}
+.gr-val{font-size:14px;font-weight:800;color:var(--dark)}
+.gr-gain{font-size:12px;font-weight:600;margin-top:1px;text-align:right}
+.gr-gain.up{color:var(--green)}.gr-gain.dn{color:var(--red)}
+.gr-empty{padding:16px 18px;font-size:13px;color:var(--muted);text-align:center}
+.summary-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+.sum-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s}
+.sum-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);border-color:#C8C4BC}
+.sum-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.sum-val{font-size:22px;font-weight:800;color:var(--dark);margin-bottom:2px}
+.sum-sub{font-size:12px;font-weight:500;color:var(--sub)}
+.sum-pills{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.sum-pill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
+.sum-pill-green{background:var(--green-l);color:var(--green)}
+.signal-badge{font-size:10px;font-weight:800;letter-spacing:.4px;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.signal-badge-sell{background:var(--red-l);color:var(--red)}
+.signal-badge-watch{background:var(--amber-l);color:var(--amber)}
+.kpi-return-wrap{display:flex;align-items:center;gap:10px}
+.kpi-sparkline{width:56px;height:22px;flex-shrink:0}
+.st-thumbs{display:flex;padding:0 26px 18px;margin-top:-4px}
+.st-thumb{width:24px;height:24px;border-radius:50%;background:var(--bg);border:2px solid var(--surface);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:var(--sub);margin-right:-6px;flex-shrink:0;overflow:hidden}
+.st-thumb-more{background:var(--border);color:var(--muted);font-size:8px}
+.insights-grid{margin-bottom:24px}
+.insights-grid-inner{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.insights-grid-inner{grid-template-columns:1fr}}
+.insight-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+.insight-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.insight-title.green{color:var(--green)}.insight-title.amber{color:var(--amber)}
+.insight-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
+.insight-item:last-child{border-bottom:none}
+.insight-left{display:flex;align-items:center;gap:10px}
+.insight-icon{font-size:16px}
+.insight-name{font-size:13px;font-weight:700;color:var(--dark)}
+.insight-set{font-size:11px;color:var(--sub)}
+.insight-right{text-align:right;flex-shrink:0}
+.insight-val{font-size:13px;font-weight:800;color:var(--dark)}
+.insight-gain{font-size:11px;font-weight:700}
+.insight-gain.up{color:var(--green)}.insight-gain.dn{color:var(--red)}
+.insight-view-all{font-size:12px;font-weight:700;color:var(--gold);cursor:pointer;padding-top:10px;border-top:1px solid var(--border);margin-top:4px;text-align:center;transition:opacity .15s}
+.insight-view-all:hover{opacity:.7}
+.sport-summary-bar{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.ssb-stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 18px}
+.ssb-label{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.ssb-val{font-size:16px;font-weight:800;color:var(--dark)}
+.ssb-val.green{color:var(--green)}.ssb-val.red{color:var(--red)}
+.nav-search-wrap{position:relative;flex:1;max-width:280px;margin:0 16px}
+.nav-search{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:'Manrope',sans-serif;font-size:13px;padding:8px 14px;border-radius:8px;outline:none;transition:border-color .15s}
+.nav-search:focus{border-color:rgba(240,180,41,.5);background:rgba(255,255,255,.1)}
+.nav-search::placeholder{color:#555}
+.nav-search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#1a1a22;border:1px solid rgba(255,255,255,.1);border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:200;overflow:hidden;display:none;max-height:320px;overflow-y:auto}
+.nav-search-results.open{display:block}
+.nav-sr-item{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s}
+.nav-sr-item:last-child{border-bottom:none}
+.nav-sr-item:hover{background:rgba(255,255,255,.06)}
+.nav-sr-left{display:flex;flex-direction:column;gap:2px;min-width:0}
+.nav-sr-name{font-size:13px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-sr-set{font-size:11px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-sr-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;margin-left:10px}
+.nav-sr-val{font-size:13px;font-weight:800;color:#F0B429}
+.nav-sr-src{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:1px 5px;border-radius:3px}
+.nav-sr-src.coll{background:rgba(34,197,94,.15);color:#4ADE80}
+.nav-sr-src.sale{background:rgba(96,165,250,.15);color:#60A5FA}
+.nav-sr-empty{padding:14px;font-size:13px;color:#555;text-align:center}
+@media(max-width:640px){.nav-search-wrap{display:none}}
+.back-top-btn{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(20px);z-index:190;background:var(--dark);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.2);opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;letter-spacing:.5px}
+.back-top-btn.visible{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+body.dark .back-top-btn{background:#222;border:1px solid rgba(255,255,255,.1)}
+.loader{display:flex;flex-direction:column;align-items:center;justify-content:center;height:320px;gap:16px}
+.spin{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-txt{font-size:13px;color:var(--muted);font-weight:500}
+.empty-msg{text-align:center;padding:60px 20px;color:var(--muted);font-size:14px}
+/* ALL CARDS TAB search results */
+#a-globalResults .gr-item .gr-source{font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle}
+/* CAMERA SCAN */
+.scan-btn{background:var(--dark);color:#fff;border:none;border-radius:8px;padding:10px 14px;font-size:18px;cursor:pointer;transition:opacity .15s;flex-shrink:0;line-height:1}
+.scan-btn:hover{opacity:.8}
+.global-search-wrap{display:flex;gap:8px;align-items:center;margin-bottom:28px}
+.global-search-wrap .global-search{margin-bottom:0;flex:1}
+.global-search-wrap .global-results{top:calc(100% + 8px)}
+.scan-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
+.scan-modal-box{background:var(--surface);border-radius:20px;padding:32px;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.3)}
+.scan-modal-icon{font-size:48px;margin-bottom:16px}
+.scan-modal-title{font-size:18px;font-weight:800;color:var(--dark);margin-bottom:8px}
+.scan-modal-sub{font-size:14px;color:var(--sub);margin-bottom:24px;line-height:1.5}
+.scan-modal-result{background:var(--bg);border-radius:12px;padding:16px;margin-bottom:20px;text-align:left}
+.scan-modal-result-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.scan-modal-result-val{font-size:15px;font-weight:700;color:var(--dark)}
+.scan-modal-btns{display:flex;gap:10px;justify-content:center}
+.scan-modal-btn{padding:10px 24px;border-radius:8px;border:none;font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s}
+.scan-modal-btn:hover{opacity:.8}
+.scan-modal-btn-primary{background:var(--dark);color:#fff}
+.scan-modal-btn-secondary{background:var(--border);color:var(--sub)}
+.scan-preview{width:100%;max-height:180px;object-fit:contain;border-radius:10px;margin-bottom:16px;display:none}
+/* ── DEAL BUILDER ── */
+.deal-fab{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--dark);color:#fff;border:none;border-radius:50px;padding:14px 22px;font-family:'Manrope',sans-serif;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 8px 32px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;letter-spacing:.3px}
+.deal-fab:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.deal-fab.active{background:#1D4ED8}
+.deal-fab-count{background:#F0B429;color:#000;font-size:11px;font-weight:800;padding:2px 7px;border-radius:20px;min-width:20px;text-align:center}
+.deal-bar{position:fixed;bottom:0;left:0;right:0;z-index:199;background:rgba(13,14,19,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.15);transform:translateY(100%);transition:transform .3s cubic-bezier(.34,1.56,.64,1);box-shadow:0 -8px 40px rgba(0,0,0,.4);max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.deal-bar.open{transform:translateY(0)}
+.deal-bar.collapsed .deal-bar-body{display:none}
+.deal-bar.collapsed{border-top:2px solid #F0B429}
+@media(max-width:640px){
+  .deal-bar{background:rgba(13,14,19,0.75);max-height:60vh}
+}
+.deal-collapse-btn{background:none;border:none;color:#888;font-size:12px;font-weight:700;cursor:pointer;padding:4px 8px;transition:color .15s;font-family:'Manrope',sans-serif;letter-spacing:.3px;white-space:nowrap}
+.deal-collapse-btn:hover{color:#fff}
+body.deal-open{padding-bottom:360px}
+body.deal-open.deal-collapsed{padding-bottom:54px}
+.deal-bar-inner{max-width:960px;margin:0 auto;padding:16px 20px 20px}
+.deal-bar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:8px}
+.deal-bar-title{font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fff;white-space:nowrap}
+.deal-bar-controls{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.deal-bar-close{background:none;border:none;color:#666;font-size:20px;cursor:pointer;padding:0 2px;line-height:1;transition:color .15s}
+.deal-bar-close:hover{color:#fff}
+/* totals — 4 boxes on desktop, 2x2 on mobile */
+.deal-totals{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.deal-total-box{background:rgba(255,255,255,.05);border-radius:10px;padding:10px 14px}
+.deal-total-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#555;margin-bottom:4px}
+.deal-total-val{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.deal-total-val.gold{color:#F0B429}.deal-total-val.amber{color:#FBBF24}.deal-total-val.green{color:#4ADE80}.deal-total-val.red{color:#FB7185}.deal-total-val.blue{color:#60A5FA}
+/* selected cards chips */
+.deal-cards-list{margin-bottom:14px;display:none}
+.deal-cards-list.has-cards{display:block}
+.deal-cards-list-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#444;margin-bottom:8px}
+.deal-cards-scroll{display:flex;gap:8px;flex-wrap:wrap}
+.deal-card-chip{display:flex;align-items:flex-start;gap:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:7px 10px;cursor:pointer;transition:all .15s;max-width:200px}
+.deal-card-chip:hover{background:rgba(251,113,133,.12);border-color:rgba(251,113,133,.3)}
+.deal-card-chip-info{display:flex;flex-direction:column;gap:1px;min-width:0}
+.deal-card-chip-name{font-size:12px;font-weight:800;color:#ccc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.deal-card-chip-set{font-size:10px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.deal-card-chip-val{font-size:11px;font-weight:700;color:#888;white-space:nowrap}
+.deal-card-chip-x{font-size:16px;color:#444;line-height:1;flex-shrink:0;align-self:center;margin-left:2px;transition:color .15s}
+.deal-card-chip:hover .deal-card-chip-x{color:#FB7185}
+/* basis toggle row */
+.deal-basis-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+/* basis toggle */
+.deal-basis-toggle{display:flex;background:rgba(255,255,255,.07);border-radius:8px;padding:3px;gap:3px;flex-shrink:0}
+.dbt-btn{background:none;border:none;border-radius:6px;padding:5px 10px;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;color:#555;cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.3px}
+.dbt-btn.active{background:#F0B429;color:#000}
+.dbt-btn:not(.active):hover{color:#ccc}
+/* pct buttons */
+.deal-pct-row{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+.deal-pct-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#555;white-space:nowrap;flex-shrink:0}
+.deal-pct-btn{border:2px solid transparent;border-radius:8px;padding:9px 12px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:68px;flex-shrink:0;position:relative}
+.deal-pct-btn .pct-label{font-size:10px;letter-spacing:.5px;opacity:.8}
+.deal-pct-btn .pct-amount{font-size:14px;font-weight:800}
+.deal-pct-btn.deal-pct-active{border-color:#fff!important;transform:scale(1.06);z-index:1}
+.deal-pct-btn.below-floor{opacity:.35;cursor:not-allowed}
+.deal-pct-btn.below-floor::after{content:'Below floor';position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#0d0e13;color:#FB7185;font-size:10px;font-weight:700;padding:4px 8px;border-radius:6px;white-space:nowrap;pointer-events:none;border:1px solid rgba(251,113,133,.3);display:none;z-index:10}
+.deal-pct-btn.below-floor:hover::after{display:block}
+.deal-pct-60{background:#1E3A5F;color:#60A5FA}
+.deal-pct-70{background:#1C3D2B;color:#4ADE80}
+.deal-pct-80{background:#2D3B00;color:#A3E635}
+.deal-pct-90{background:#3B2D00;color:#FCD34D}
+.deal-pct-100{background:#3B1F00;color:#FB923C}
+/* offer input row */
+.deal-offer-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.deal-input-wrap{position:relative;display:flex;align-items:center}
+.deal-input-prefix{position:absolute;left:11px;color:#aaa;font-size:15px;font-weight:800;pointer-events:none;z-index:1;line-height:1}
+.deal-custom-input{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);color:#fff;font-family:'Manrope',sans-serif;font-size:15px;font-weight:800;padding:10px 12px 10px 24px;border-radius:8px;outline:none;width:160px;transition:border-color .15s;-moz-appearance:textfield}
+.deal-custom-input::-webkit-outer-spin-button,.deal-custom-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.deal-custom-input:focus{border-color:#F0B429}
+.deal-custom-result{font-size:13px;font-weight:700;padding:10px 14px;border-radius:8px;flex:1;min-width:180px;line-height:1.4}
+.deal-custom-result.ok{background:rgba(74,222,128,.1);color:#4ADE80;border:1px solid rgba(74,222,128,.2)}
+.deal-custom-result.warn{background:rgba(251,191,36,.1);color:#FBBF24;border:1px solid rgba(251,191,36,.2)}
+.deal-custom-result.no{background:rgba(251,113,133,.1);color:#FB7185;border:1px solid rgba(251,113,133,.2)}
+/* clear button — lives in header */
+.deal-clear-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#666;font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;padding:5px 10px;cursor:pointer;transition:all .15s}
+.deal-clear-btn:hover{background:rgba(255,255,255,.12);color:#FB7185}
+/* show customer full-width button */
+.deal-show-full-btn{width:100%;background:linear-gradient(135deg,#F0B429,#E09000);color:#000;border:none;border-radius:10px;padding:14px;font-family:'Manrope',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:opacity .15s;letter-spacing:.3px;display:none}
+.deal-show-full-btn:hover{opacity:.88}
+.deal-show-full-btn.visible{display:block}
+/* card selection */
+.c.deal-selected{outline:3px solid #F0B429;outline-offset:2px;box-shadow:0 0 20px rgba(240,180,41,.35)}
+.c .deal-check{display:none;position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:#F0B429;color:#000;font-size:12px;font-weight:800;align-items:center;justify-content:center;z-index:5;pointer-events:none}
+.deal-mode .c{cursor:pointer;position:relative}
+.deal-mode .c .deal-check{display:flex}
+.deal-mode .c.deal-selected .deal-check{background:#F0B429}
+.deal-mode .c:not(.deal-selected) .deal-check{background:rgba(255,255,255,.15);color:transparent}
+.deal-mode-banner{display:none;background:#1D4ED8;color:#fff;text-align:center;padding:8px 16px;font-size:13px;font-weight:700;letter-spacing:.3px;position:sticky;top:0;z-index:98}
+.deal-mode-banner.show{display:block}
+/* show customer fullscreen */
+.deal-present{position:fixed;inset:0;z-index:500;background:#0A0A0F;display:none;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.deal-present.open{display:flex}
+.deal-present-header{background:#111118;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:10}
+.deal-present-logo{font-size:16px;font-weight:800;letter-spacing:3px;color:#fff}
+.deal-present-logo span{color:#F0B429}
+.deal-present-close{background:rgba(255,255,255,.08);border:none;color:#aaa;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border-radius:8px;cursor:pointer;transition:all .15s}
+.deal-present-close:hover{background:rgba(255,255,255,.15);color:#fff}
+.deal-present-body{flex:1;padding:28px 24px;max-width:680px;margin:0 auto;width:100%}
+.deal-present-cards{margin-bottom:28px}
+.deal-present-cards-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:12px}
+.dp-card-row{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(255,255,255,.05);border-radius:14px;margin-bottom:10px;border-left:4px solid #F0B429;gap:12px}
+.dp-card-name{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px}
+.dp-card-set{font-size:13px;color:#666}
+.dp-card-right{text-align:right;flex-shrink:0}
+.dp-card-val{font-size:16px;font-weight:800;color:#fff}
+.dp-card-cond{font-size:11px;font-weight:700;letter-spacing:.5px;padding:4px 10px;border-radius:6px;color:#fff;margin-top:4px;display:inline-block}
+/* offer box — big and bold for customer */
+.deal-present-offer{background:rgba(240,180,41,.07);border:2px solid rgba(240,180,41,.3);border-radius:20px;padding:32px 24px;text-align:center;margin-bottom:20px}
+.dp-offer-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#666;margin-bottom:12px}
+.dp-offer-val{font-size:80px;font-weight:800;color:#F0B429;letter-spacing:-3px;line-height:1}
+.dp-offer-savings{display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:30px;padding:8px 20px}
+.dp-offer-savings-pct{font-size:18px;font-weight:800;color:#4ADE80}
+.dp-offer-savings-txt{font-size:18px;font-weight:800;color:#4ADE80}
+.dp-offer-sub{display:none}
+/* editable input on customer screen */
+.dp-offer-edit-wrap{position:relative;display:flex;align-items:center;justify-content:center;margin-top:20px}
+.dp-offer-edit-prefix{position:absolute;left:14px;color:#aaa;font-size:18px;font-weight:800;pointer-events:none;z-index:1;line-height:1}
+.dp-offer-edit-input{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.2);color:#fff;font-family:'Manrope',sans-serif;font-size:22px;font-weight:800;padding:14px 16px 14px 40px;border-radius:12px;outline:none;width:240px;text-align:left;transition:border-color .15s;-moz-appearance:textfield}
+.dp-offer-edit-input::-webkit-outer-spin-button,.dp-offer-edit-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.dp-offer-edit-input:focus{border-color:#F0B429}
+.dp-offer-edit-input::placeholder{color:rgba(255,255,255,.2)}
+@media(max-width:640px){
+  .dp-offer-val{font-size:56px}
+  .dp-offer-savings-pct{font-size:15px}
+  .dp-offer-savings-txt{font-size:15px}
+  .dp-card-name{font-size:15px}
+}
+/* mobile deal overrides — compact strip by default */
+@media(max-width:640px){
+  .deal-fab{bottom:14px;right:14px;padding:11px 16px;font-size:12px;gap:6px}
+  .deal-bar-inner{padding:10px 14px 12px}
+  .deal-bar-top{margin-bottom:0}
+  .deal-bar.collapsed .deal-bar-top{margin-bottom:0}
+  /* show inline mini-totals in the header strip on mobile */
+  .deal-mini-totals{display:flex;gap:12px;align-items:center;font-size:12px;font-weight:700;color:#aaa;margin-left:4px}
+  .deal-mini-val{color:#fff;font-weight:800}
+  .deal-mini-floor{color:#FBBF24;font-weight:800}
+  /* when expanded on mobile, show top margin */
+  .deal-bar:not(.collapsed) .deal-bar-top{margin-bottom:14px}
+  /* body padding */
+  body.deal-open{padding-bottom:420px}
+  body.deal-open.deal-collapsed{padding-bottom:54px}
+  /* size tweaks */
+  .deal-totals{grid-template-columns:1fr 1fr;gap:8px}
+  .deal-total-val{font-size:17px}
+  .deal-total-label{font-size:8px}
+  .deal-pct-btn{min-width:58px;padding:8px 8px}
+  .deal-pct-btn .pct-amount{font-size:13px}
+  .deal-pct-btn .pct-label{font-size:9px}
+  .deal-custom-input{width:130px;font-size:14px}
+  .deal-custom-result{font-size:12px;padding:9px 12px;min-width:0;width:100%}
+  .deal-offer-row{flex-wrap:wrap}
+  .deal-card-chip{max-width:160px}
+  .dp-offer-val{font-size:38px}
+  .deal-bar-title{font-size:11px}
+  .deal-collapse-btn{font-size:11px;padding:3px 6px}
+  .deal-bar-close{font-size:12px;font-weight:700;font-family:'Manrope',sans-serif;padding:4px 8px;background:rgba(255,255,255,.07);border-radius:6px;border:none;color:#aaa;cursor:pointer}
+}
+/* hide mini totals on desktop */
+.deal-mini-totals{display:none}
+@media(max-width:640px){
+  nav,.tab-bar,.kpis,.view{padding-left:16px;padding-right:16px}
+  .tab-bar{padding-left:12px;padding-right:12px}
+  .tab-btn{padding:12px 10px;font-size:10px;letter-spacing:.5px}
+  .tab-badge{font-size:9px;padding:1px 4px}
+  nav{height:64px}
+  .logo-main{font-size:16px;letter-spacing:2px}
+  .logo-under{font-size:8px}
+  .logo-sep{width:4px;height:4px;margin:0 6px}
+  .dark-toggle-wrap{gap:6px}
+  .live-badge{display:none}
+  .kpis{grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto}
+  .kpi-ctx-box{grid-column:1/-1;border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+  .kpi-ctx-box .kpi-l{margin-bottom:0}
+  .kpi-ctx-val{font-size:20px;margin-top:0}
+  .kpi{padding:12px 16px}
+  .kpi-v{font-size:18px}
+  .kpi-l{font-size:9px}
+  .summary-panel{grid-template-columns:1fr;gap:10px}
+  .sum-val{font-size:18px}
+  .sport-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .st-val{font-size:22px;letter-spacing:-0.5px}
+  .st-body{padding:14px 16px 16px;flex-direction:column;align-items:flex-start;gap:8px}
+  .st-gain{font-size:12px;padding:5px 10px}
+  .st-name{font-size:12px}
+  .st-pill{font-size:10px}
+  .st-header{padding:14px 16px 12px}
+  .st-icon{font-size:22px}
+  .st-arrow{width:26px;height:26px;font-size:11px}
+  .player-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .pt-val{font-size:18px}
+  .pt-name{font-size:13px}
+  .card-grid{grid-template-columns:1fr;gap:12px}
+  .c-val{font-size:24px}
+  .c-gain{font-size:16px}
+  .c-stat-l{font-size:9px;letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .c-stat-v{font-size:14px;white-space:nowrap}
+  .c-stat{padding:8px 10px;min-width:0}
+  .c-proj-grid{grid-template-columns:1fr 1fr 1fr;gap:4px}
+  .c-proj-grid .c-stat{padding:6px 8px}
+  .c-proj-grid .c-stat-v{font-size:13px}
+  .c-pricing-grid{grid-template-columns:1fr 1fr;gap:6px}
+  .c-pricing-grid-3{grid-template-columns:1fr 1fr 1fr;gap:4px}
+  .c-pricing-grid .c-stat-v,.c-pricing-grid-3 .c-stat-v{font-size:13px}
+  .sport-summary-bar{gap:8px}
+  .ssb-stat{padding:8px 12px}
+  .ssb-val{font-size:14px}
+  .bc{font-size:12px;gap:6px;margin-bottom:20px}
+  #sold-view .summary-panel{grid-template-columns:repeat(2,1fr)}
+  #sold-view .card-grid{grid-template-columns:1fr}
+}
+.dp-offer-edit-wrap{position:relative;display:flex;align-items:center;justify-content:center;margin-top:14px}
+.dp-offer-edit-prefix{position:absolute;left:14px;color:#aaa;font-size:18px;font-weight:800;pointer-events:none}
+.dp-offer-edit-input{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.2);color:#fff;font-family:'Manrope',sans-serif;font-size:22px;font-weight:800;padding:12px 16px 12px 36px;border-radius:10px;outline:none;width:220px;text-align:left;transition:border-color .15s;-moz-appearance:textfield}
+.dp-offer-edit-input::-webkit-outer-spin-button,.dp-offer-edit-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.dp-offer-edit-input:focus{border-color:#F0B429}
+.dp-offer-edit-input::placeholder{color:rgba(255,255,255,.2)}
+.dp-mark-sold-btn{width:100%;background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff;border:none;border-radius:12px;padding:16px;font-family:'Manrope',sans-serif;font-size:15px;font-weight:800;cursor:pointer;transition:opacity .15s;letter-spacing:.3px;margin-top:8px}
+.dp-mark-sold-btn:hover{opacity:.88}
+.dp-sold-confirm{text-align:center;padding:24px 0}
+.dp-sold-confirm-icon{font-size:48px;margin-bottom:12px}
+.dp-sold-confirm-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:8px}
+.dp-sold-confirm-sub{font-size:14px;color:#888;line-height:1.5}
+.show-day-totals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.show-day-box{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:16px 18px}
+.show-day-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.show-day-val{font-size:26px;font-weight:800;color:var(--dark);letter-spacing:-0.5px;margin-bottom:4px}
+.show-day-val.green{color:#166534}
+body.dark .show-day-val.green{color:#4ADE80}
+.show-day-sub{font-size:11px;color:var(--muted);font-weight:600}
+/* Show Sales section */
+.show-sales-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.show-sales-title{font-size:15px;font-weight:800;color:var(--dark)}
+.show-sales-badge{display:inline-block;background:#22C55E;color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:20px;margin-left:8px}
+.show-sales-email{background:none;border:1px solid var(--blue);border-radius:6px;color:var(--blue);font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;padding:5px 12px;cursor:pointer;transition:all .15s}
+.show-sales-email:hover{background:var(--blue);color:#fff}
+.show-sales-new{background:none;border:1px solid var(--green);border-radius:6px;color:var(--green);font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;padding:5px 12px;cursor:pointer;transition:all .15s}
+.show-sales-new:hover{background:var(--green);color:#fff}
+.show-sales-clear{background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;padding:5px 12px;cursor:pointer;transition:all .15s}
+.show-sales-clear:hover{border-color:var(--red);color:var(--red)}
+/* ── QUICK ADD SALE MODAL ── */
+.quick-add-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
+.quick-add-modal.open{display:flex}
+.quick-add-box{background:var(--surface);border-radius:20px;padding:28px 24px;max-width:400px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.3)}
+.quick-add-title{font-size:16px;font-weight:800;color:var(--dark);margin-bottom:20px}
+.quick-add-field{margin-bottom:14px}
+.quick-add-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.quick-add-input{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'Manrope',sans-serif;font-size:15px;font-weight:600;padding:10px 14px;border-radius:8px;outline:none;transition:border-color .15s}
+.quick-add-input:focus{border-color:var(--dark)}
+.quick-add-input.price-input{font-size:22px;font-weight:800}
+.quick-add-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quick-add-btns{display:flex;gap:10px;margin-top:20px}
+.quick-add-btn-primary{flex:1;background:var(--dark);color:#fff;border:none;border-radius:10px;padding:13px;font-family:'Manrope',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:opacity .15s}
+.quick-add-btn-primary:hover{opacity:.85}
+.quick-add-btn-secondary{background:var(--bg);border:1.5px solid var(--border);color:var(--muted);border-radius:10px;padding:13px 18px;font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.quick-add-btn-secondary:hover{border-color:var(--dark);color:var(--dark)}
+.show-sales-add{background:none;border:1px solid #22C55E;border-radius:6px;color:#22C55E;font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;padding:5px 12px;cursor:pointer;transition:all .15s}
+.show-sales-add:hover{background:#22C55E;color:#fff}
+.show-sale-card{background:var(--surface);border:1.5px solid #22C55E;border-radius:14px;padding:16px 18px;margin-bottom:12px;position:relative}
+.show-sale-time{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.show-sale-total{font-size:26px;font-weight:800;color:#22C55E;margin-bottom:12px;letter-spacing:-0.5px}
+.show-sale-cards{display:flex;flex-direction:column;gap:6px}
+.show-sale-row{display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px solid var(--border)}
+.show-sale-row:last-child{border-bottom:none}
+.show-sale-row-left{}
+.show-sale-row-name{font-weight:700;color:var(--dark)}
+.show-sale-row-meta{font-size:11px;color:var(--muted)}
+.show-sale-row-price{font-weight:800;color:var(--dark);white-space:nowrap;flex-shrink:0}
+.show-sale-delete{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;transition:color .15s}
+.show-sale-delete:hover{color:var(--red)}
+.show-sales-divider{border:none;border-top:2px dashed var(--border);margin:24px 0 20px}
+/* ── BIG SHOW PRICING on cards ── */
+.c-show-pricing-highlight{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;padding:14px 0 12px;border-top:2px solid var(--border);border-bottom:1px solid var(--border)}
+.c-show-price-big,.c-floor-price-big{background:var(--bg);border-radius:10px;padding:12px 14px}
+.c-show-price-big{background:#DCFCE7}
+.c-floor-price-big{background:#FEF3C7}
+body.dark .c-show-price-big{background:rgba(34,197,94,0.12)}
+body.dark .c-floor-price-big{background:rgba(251,191,36,0.12)}
+.c-show-price-val{font-size:26px;font-weight:800;color:var(--green);letter-spacing:-0.5px;line-height:1.1;margin-top:4px}
+.c-floor-price-val{font-size:26px;font-weight:800;color:var(--amber);letter-spacing:-0.5px;line-height:1.1;margin-top:4px}
+/* ── CASH GOAL TRACKER ── */
+.cash-goal-bar{background:var(--dark);color:#fff;padding:12px 40px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.06)}
+@media(max-width:640px){.cash-goal-bar{padding:10px 16px;gap:10px}}
+.cash-goal-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#555;white-space:nowrap}
+.cash-goal-input-wrap{position:relative;display:flex;align-items:center}
+.cash-goal-prefix{position:absolute;left:10px;color:#aaa;font-size:13px;font-weight:700;pointer-events:none;z-index:1}
+.cash-goal-input{background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);color:#fff;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;padding:6px 10px 6px 22px;border-radius:8px;outline:none;width:110px;-moz-appearance:textfield;transition:border-color .15s}
+.cash-goal-input::-webkit-outer-spin-button,.cash-goal-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.cash-goal-input:focus{border-color:#F0B429}
+.cash-goal-progress{flex:1;min-width:160px;max-width:320px}
+.cash-goal-track{height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden}
+.cash-goal-fill{height:100%;background:#F0B429;border-radius:3px;transition:width .4s ease}
+.cash-goal-fill.done{background:#4ADE80}
+.cash-goal-stats{font-size:12px;font-weight:700;color:#888;white-space:nowrap}
+.cash-goal-stats b{color:#F0B429}
+.cash-goal-stats b.done{color:#4ADE80}
+.cash-goal-clear{background:none;border:none;color:#444;font-size:11px;cursor:pointer;padding:2px 6px;font-family:'Manrope',sans-serif;font-weight:700;transition:color .15s}
+.cash-goal-clear:hover{color:#FB7185}
+/* Show sort option */
+
+</style>
+<body>
+<nav>
+  <div class="nav-left"></div>
+  <div class="logo" onclick="goLogoHome()">
+    <div class="logo-main">My<span class="logo-sep"></span><span class="logo-card">Card</span>&nbsp;Portfolio</div>
+    <div class="logo-under">Sports Card Tracker</div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-search-wrap" id="navSearchWrap">
+      <input class="nav-search" id="navSearch" placeholder="🔍 Find a card…" oninput="renderNavSearch()" onfocus="$('navSearchResults').classList.add('open')" onblur="setTimeout(()=>$('navSearchResults').classList.remove('open'),200)">
+      <div class="nav-search-results" id="navSearchResults"></div>
+    </div>
+    <div class="dark-toggle-wrap">
+      <span class="dark-toggle-icon" id="themeIcon">☀️</span>
+      <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode"></button>
+    </div>
+    <div class="live-badge" id="liveBadge">Loading...</div>
+  </div>
+</nav>
+<div class="tab-bar">
+  <button class="tab-btn active" id="tabAllCards" onclick="switchTab('allcards')">ALL CARDS<span class="tab-badge" id="allCardsBadge" style="display:none;background:#34D399;color:#000"></span></button>
+  <button class="tab-btn" id="tabCollection" onclick="switchTab('collection')">COLLECTION<span class="tab-badge" id="collBadge" style="display:none;background:#F0B429;color:#000"></span></button>
+  <button class="tab-btn" id="tabForSale" onclick="switchTab('forsale')">FOR SALE<span class="tab-badge" id="forSaleBadge" style="display:none"></span></button>
+  <button class="tab-btn" id="tabSold" onclick="switchTab('sold')">SOLD<span class="tab-badge" id="soldBadge" style="display:none;background:#8B5CF6"></span></button>
+</div>
+<div class="kpis">
+  <div class="kpi kpi-ctx-box"><div class="kpi-l" id="kpiCtxLabel">ALL CARDS</div><div class="kpi-ctx-val" id="kpiCtxCount">—</div></div>
+  <div class="kpi"><div class="kpi-l">Total Value</div><div class="kpi-v gold" id="kV">—</div></div>
+  <div class="kpi"><div class="kpi-l" id="kpi3Label">Total Cost</div><div class="kpi-v" id="kC">—</div></div>
+  <div class="kpi"><div class="kpi-l">Total Gain</div><div class="kpi-v" id="kG">—</div></div>
+  <div class="kpi"><div class="kpi-l">Return</div><div class="kpi-return-wrap"><div class="kpi-v" id="kR">—</div><svg class="kpi-sparkline" id="kSparkline" viewBox="0 0 56 22" fill="none" xmlns="http://www.w3.org/2000/svg"></svg></div></div>
+</div>
+
+<!-- ═══ CASH GOAL TRACKER ═══ -->
+<div class="cash-goal-bar" id="cashGoalBar">
+  <span class="cash-goal-label">Show Goal</span>
+  <div class="cash-goal-input-wrap">
+    <span class="cash-goal-prefix">$</span>
+    <input class="cash-goal-input" id="cashGoalInput" type="number" placeholder="0" oninput="updateCashGoal()" onfocus="this.select()">
+  </div>
+  <div class="cash-goal-progress" id="cashGoalProgress" style="display:none">
+    <div class="cash-goal-track"><div class="cash-goal-fill" id="cashGoalFill" style="width:0%"></div></div>
+  </div>
+  <div class="cash-goal-stats" id="cashGoalStats" style="display:none"></div>
+  <button class="cash-goal-clear" id="cashGoalClearBtn" onclick="clearCashGoal()" style="display:none">✕</button>
+</div>
+
+<!-- ═══ ALL CARDS TAB ═══ -->
+<div id="a-vHome" class="view active">
+  <div class="loader" id="a-loader"><div class="spin"></div><div class="loader-txt">Loading all cards...</div></div>
+  <div id="a-homeInner" style="display:none">
+    <div class="global-search-wrap">
+      <input class="global-search" id="a-globalSearch" placeholder="🔍  Search any player across collection &amp; for sale…" oninput="renderGlobalSearch('a')">
+      <button class="scan-btn" onclick="openScanner('a')" title="Scan a card with your camera">📷</button>
+      <div class="global-results" id="a-globalResults"></div>
+    </div>
+    <div class="summary-panel" id="a-summary"></div>
+    <div class="insights-grid" id="a-insights"></div>
+    <div class="sec-label" style="margin-top:24px">All Cards by Sport</div>
+    <div class="sport-grid" id="a-sportGrid"></div>
+  </div>
+</div>
+<div id="a-vPlayers" class="view">
+  <div class="bc"><span class="bc-item" onclick="goHome('a')">All Sports</span><span class="bc-sep">›</span><span class="bc-cur" id="a-bcSport"></span></div>
+  <div class="sport-summary-bar" id="a-sportSummary"></div>
+  <div class="toolbar">
+    <input class="search" id="a-playerSearch" placeholder="Search player…" oninput="renderPlayers('a')">
+    <select class="sort" id="a-playerSort" onchange="renderPlayers('a')"><option value="val">Sort: Value ↓</option><option value="gain">Sort: Gain $ ↓</option><option value="gainpct">Sort: Gain % ↓</option><option value="cards">Sort: # Cards ↓</option><option value="az">Sort: A–Z</option></select>
+    <select class="sort" id="a-playerSrcFilter" onchange="renderPlayers('a')"><option value="all">All Sources</option><option value="collection">Collection Only</option><option value="forsale">For Sale Only</option></select>
+    <div class="count-lbl" id="a-playerCount"></div>
+  </div>
+  <div class="player-grid" id="a-playerGrid"></div>
+</div>
+<div id="a-vCards" class="view">
+  <div class="bc"><span class="bc-item" onclick="goHome('a')">All Sports</span><span class="bc-sep">›</span><span class="bc-item" id="a-bcSport2" onclick="goPlayers('a')"></span><span class="bc-sep">›</span><span class="bc-cur" id="a-bcPlayer"></span></div>
+  <div class="toolbar">
+    <select class="sort" id="a-cardSort" onchange="renderCards('a')"><option value="val">Sort: Value ↓</option><option value="gain">Sort: Gain $ ↓</option><option value="year">Sort: Year ↓</option></select>
+    <button class="show-mode-btn" data-grid="a-cardGrid" onclick="toggleShowMode('a-cardGrid')">☰ List View</button>
+    <div class="count-lbl" id="a-cardCount"></div>
+  </div>
+  <div class="card-grid" id="a-cardGrid"></div>
+</div>
+
+<!-- ═══ COLLECTION TAB ═══ -->
+<div id="c-vHome" class="view">
+  <div class="loader" id="loader" style="display:none"><div class="spin"></div><div class="loader-txt">Loading portfolio...</div></div>
+  <div id="c-homeInner" style="display:none">
+    <div class="summary-panel" id="c-summary"></div>
+    <div class="insights-grid" id="c-insights"></div>
+    <div class="sec-label" style="margin-top:24px">Collection by Sport</div>
+    <div class="sport-grid" id="c-sportGrid"></div>
+  </div>
+</div>
+<div id="c-vPlayers" class="view">
+  <div class="bc"><span class="bc-item" onclick="goHome('c')">All Sports</span><span class="bc-sep">›</span><span class="bc-cur" id="c-bcSport"></span></div>
+  <div class="sport-summary-bar" id="c-sportSummary"></div>
+  <div class="toolbar">
+    <input class="search" id="c-playerSearch" placeholder="Search player…" oninput="renderPlayers('c')">
+    <select class="sort" id="c-playerSort" onchange="renderPlayers('c')"><option value="val">Sort: Value ↓</option><option value="gain">Sort: Gain $ ↓</option><option value="gainpct">Sort: Gain % ↓</option><option value="cards">Sort: # Cards ↓</option><option value="az">Sort: A–Z</option></select>
+    <div class="count-lbl" id="c-playerCount"></div>
+  </div>
+  <div class="player-grid" id="c-playerGrid"></div>
+</div>
+<div id="c-vCards" class="view">
+  <div class="bc"><span class="bc-item" onclick="goHome('c')">All Sports</span><span class="bc-sep">›</span><span class="bc-item" id="c-bcSport2" onclick="goPlayers('c')"></span><span class="bc-sep">›</span><span class="bc-cur" id="c-bcPlayer"></span></div>
+  <div class="toolbar">
+    <select class="sort" id="c-cardSort" onchange="renderCards('c')"><option value="val">Sort: Value ↓</option><option value="gain">Sort: Gain $ ↓</option><option value="year">Sort: Year ↓</option></select>
+    <div class="count-lbl" id="c-cardCount"></div>
+  </div>
+  <div class="card-grid" id="c-cardGrid"></div>
+</div>
+<div id="c-vFiltered" class="view">
+  <div class="bc"><span class="bc-item" onclick="goHome('c')">All Sports</span><span class="bc-sep">›</span><span class="bc-cur" id="c-bcFiltered"></span></div>
+  <div class="toolbar">
+    <select class="sort" id="c-filteredSort" onchange="renderFiltered('c')"><option value="val">Sort: Value ↓</option><option value="gain">Sort: Gain $ ↓</option><option value="year">Sort: Year ↓</option><option value="az">Sort: A–Z</option></select>
+    <div class="count-lbl" id="c-filteredCount"></div>
+  </div>
+  <div class="card-grid" id="c-filteredGrid"></div>
+</div>
+
+<!-- ═══ FOR SALE TAB ═══ -->
+<div id="s-vFiltered" class="view">
+  <div class="bc"><span class="bc-item" onclick="goHome('s')">All Sports</span><span class="bc-sep">›</span><span class="bc-cur" id="s-bcFiltered"></span></div>
+  <div class="toolbar">
+    <select class="sort" id="s-filteredSort" onchange="renderFiltered('s')"><option value="val">Sort: Value ↓</option><option value="gain">Sort: Gain $ ↓</option><option value="year">Sort: Year ↓</option><option value="az">Sort: A–Z</option></select>
+    <div class="count-lbl" id="s-filteredCount"></div>
+  </div>
+  <div class="card-grid" id="s-filteredGrid"></div>
+</div>
+<div id="s-vHome" class="view">
+  <div class="loader" id="s-loader" style="display:none"><div class="spin"></div><div class="loader-txt">Loading for sale...</div></div>
+  <div id="s-homeInner" style="display:none">
+    <div class="global-search-wrap">
+      <input class="global-search" id="s-globalSearch" placeholder="🔍  Search for sale cards…" oninput="renderGlobalSearch('s')">
+      <button class="scan-btn" onclick="openScanner('s')" title="Scan a card">📷</button>
+      <div class="global-results" id="s-globalResults"></div>
+    </div>
+    <div class="summary-panel" id="s-summary"></div>
+    <div class="insights-grid" id="s-insights"></div>
+    <div class="sec-label" style="margin-top:24px">For Sale by Sport</div>
+    <div class="sport-grid" id="s-sportGrid"></div>
+  </div>
+</div>
+<div id="s-vPlayers" class="view">
+  <div class="bc"><span class="bc-item" onclick="goHome('s')">All Sports</span><span class="bc-sep">›</span><span class="bc-cur" id="s-bcSport"></span></div>
+  <div class="sport-summary-bar" id="s-sportSummary"></div>
+  <div class="toolbar">
+    <input class="search" id="s-playerSearch" placeholder="Search player…" oninput="renderPlayers('s')">
+    <select class="sort" id="s-playerSort" onchange="renderPlayers('s')"><option value="val">Sort: Value ↓</option><option value="gain">Sort: Gain $ ↓</option><option value="gainpct">Sort: Gain % ↓</option><option value="cards">Sort: # Cards ↓</option><option value="az">Sort: A–Z</option></select>
+    <div class="count-lbl" id="s-playerCount"></div>
+  </div>
+  <div class="player-grid" id="s-playerGrid"></div>
+</div>
+<div id="s-vCards" class="view">
+  <div class="bc"><span class="bc-item" onclick="goHome('s')">All Sports</span><span class="bc-sep">›</span><span class="bc-item" id="s-bcSport2" onclick="goPlayers('s')"></span><span class="bc-sep">›</span><span class="bc-cur" id="s-bcPlayer"></span></div>
+  <div class="toolbar">
+    <select class="sort" id="s-cardSort" onchange="renderCards('s')"><option value="price">Sort: Show Price ↓</option><option value="val">Sort: Value ↓</option><option value="gain">Sort: Gain $ ↓</option><option value="year">Sort: Year ↓</option></select>
+    <button class="show-mode-btn" id="showModeBtn" onclick="toggleShowMode()">🎪 Show View</button>
+    <button class="toolbar-scan-btn" onclick="openScanner('s')" title="Scan a card">📷</button>
+    <div class="count-lbl" id="s-cardCount"></div>
+  </div>
+  <div class="card-grid" id="s-cardGrid"></div>
+</div>
+
+<!-- ═══ BACK TO TOP ═══ -->
+<button class="back-top-btn" id="backTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+
+<!-- ═══ DEAL BUILDER ═══ -->
+<div class="deal-mode-banner" id="dealBanner">🤝 Tap any card to add it to the deal</div>
+<button class="deal-fab" id="dealFab" onclick="toggleDealMode()">🤝 Deal Builder <span class="deal-fab-count" id="dealFabCount" style="display:none">0</span></button>
+<div class="deal-bar" id="dealBar">
+  <div class="deal-bar-inner">
+    <div class="deal-bar-top" onclick="if(window.innerWidth<=640)toggleDealCollapse()" style="cursor:pointer">
+      <div class="deal-bar-title">🤝 Deal Builder</div>
+      <div class="deal-mini-totals">
+        <span><span class="deal-mini-val" id="dealMiniCount">0</span> cards</span>
+        <span>Floor <span class="deal-mini-floor" id="dealMiniFloor">—</span></span>
+      </div>
+      <div class="deal-bar-controls">
+        <button class="deal-clear-btn" id="dealClearBtn" onclick="clearDealSelection()" style="display:none">Clear</button>
+        <button class="deal-collapse-btn" id="dealCollapseBtn" onclick="toggleDealCollapse()">▼ Hide</button>
+        <button class="deal-bar-close" onclick="toggleDealMode()">Done</button>
+      </div>
+    </div>
+    <div class="deal-bar-body" id="dealBarBody">
+      <div class="deal-totals">
+        <div class="deal-total-box"><div class="deal-total-label">Cards</div><div class="deal-total-val gold" id="dealCount">0</div></div>
+        <div class="deal-total-box"><div class="deal-total-label">Market Value</div><div class="deal-total-val" id="dealValue">—</div></div>
+        <div class="deal-total-box"><div class="deal-total-label">Show Price</div><div class="deal-total-val blue" id="dealShowPrice">—</div></div>
+        <div class="deal-total-box"><div class="deal-total-label">Your Floor</div><div class="deal-total-val amber" id="dealFloor">—</div></div>
+      </div>
+      <div class="deal-cards-list" id="dealCardsList">
+        <div class="deal-cards-list-label">Selected — tap chip to remove</div>
+        <div class="deal-cards-scroll" id="dealCardsScroll"></div>
+      </div>
+      <div class="deal-basis-row">
+        <span class="deal-pct-label">% of:</span>
+        <div class="deal-basis-toggle" id="dealBasisToggle">
+          <button class="dbt-btn active" id="dbtShow" onclick="setDealBasis('show')">Show Price</button>
+          <button class="dbt-btn" id="dbtMarket" onclick="setDealBasis('market')">Market Value</button>
+        </div>
+      </div>
+      <div class="deal-pct-row">
+        <button class="deal-pct-btn deal-pct-60" id="dealBtn60" onclick="applyPctOffer(60)"><span class="pct-label">60%</span><span class="pct-amount" id="dealAmt60">—</span></button>
+        <button class="deal-pct-btn deal-pct-70" id="dealBtn70" onclick="applyPctOffer(70)"><span class="pct-label">70%</span><span class="pct-amount" id="dealAmt70">—</span></button>
+        <button class="deal-pct-btn deal-pct-80" id="dealBtn80" onclick="applyPctOffer(80)"><span class="pct-label">80%</span><span class="pct-amount" id="dealAmt80">—</span></button>
+        <button class="deal-pct-btn deal-pct-90" id="dealBtn90" onclick="applyPctOffer(90)"><span class="pct-label">90%</span><span class="pct-amount" id="dealAmt90">—</span></button>
+        <button class="deal-pct-btn deal-pct-100" id="dealBtn100" onclick="applyPctOffer(100)"><span class="pct-label">100%</span><span class="pct-amount" id="dealAmt100">—</span></button>
+      </div>
+      <div class="deal-floor-warn" id="dealFloorWarn">⚠ Below your floor — don't take this deal</div>
+      <div class="deal-offer-row">
+        <div class="deal-input-wrap">
+          <span class="deal-input-prefix">$</span>
+          <input class="deal-custom-input" id="dealCustomInput" type="number" placeholder="Enter offer…" oninput="evalCustomOffer(); setActivePctBtn(null);">
+        </div>
+        <div class="deal-custom-result" id="dealCustomResult" style="display:none"></div>
+      </div>
+      <button class="deal-show-full-btn" id="dealShowFullBtn" onclick="openDealPresent()">📱 Show Customer</button>
+    </div><!-- end deal-bar-body -->
+  </div>
+</div>
+
+<!-- ═══ SHOW CUSTOMER FULLSCREEN ═══ -->
+<div class="deal-present" id="dealPresent">
+  <div class="deal-present-header">
+    <div class="deal-present-logo">My<span>Card</span> Portfolio</div>
+    <button class="deal-present-close" onclick="closeDealPresent()">← Back</button>
+  </div>
+  <div class="deal-present-body">
+    <div class="deal-present-cards">
+      <div class="deal-present-cards-title">Cards in this deal</div>
+      <div id="dpCardsList"></div>
+    </div>
+    <div class="deal-present-offer" id="dpOfferBox">
+      <div class="dp-offer-label">Bundle Price</div>
+      <div class="dp-offer-val" id="dpOfferVal">—</div>
+      <div class="dp-offer-savings" id="dpOfferSavings">
+        <span class="dp-offer-savings-pct" id="dpOfferPct"></span>
+        <span class="dp-offer-savings-txt" id="dpOfferSavingsTxt"></span>
+      </div>
+      <div class="dp-offer-edit-wrap">
+        <span class="dp-offer-edit-prefix">$</span>
+        <input class="dp-offer-edit-input" id="dpOfferEditInput" type="number" placeholder="Adjust price…" oninput="updatePresentOffer()">
+      </div>
+    </div>
+    <button class="dp-mark-sold-btn" id="dpMarkSoldBtn" onclick="markDealAsSold()">✅ Deal Done — Mark as Sold</button>
+    <div class="dp-sold-confirm" id="dpSoldConfirm" style="display:none">
+      <div class="dp-sold-confirm-icon">🎉</div>
+      <div class="dp-sold-confirm-title">Deal Recorded!</div>
+      <div class="dp-sold-confirm-sub" id="dpSoldConfirmSub"></div>
+      <button class="deal-present-close" style="margin-top:16px;background:#F0B429;color:#000;border:none;border-radius:8px;padding:10px 24px;font-family:Manrope,sans-serif;font-size:14px;font-weight:800;cursor:pointer;" onclick="closeDealPresent();toggleDealMode()">Done — Exit Deal Mode</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CAMERA SCAN ═══ -->
+<input type="file" id="scanInput" accept="image/*" capture="environment" style="display:none" onchange="handleScanImage(event)">
+<div class="scan-modal" id="scanModal" style="display:none">
+  <div class="scan-modal-box">
+    <div class="scan-modal-icon" id="scanIcon">📷</div>
+    <div class="scan-modal-title" id="scanTitle">Scanning Card...</div>
+    <div class="scan-modal-sub" id="scanSub">Claude is reading your card. This takes a few seconds.</div>
+    <img class="scan-preview" id="scanPreview">
+    <div class="scan-modal-result" id="scanResult" style="display:none">
+      <div class="scan-modal-result-label">Detected Card</div>
+      <div class="scan-modal-result-val" id="scanResultText"></div>
+    </div>
+    <div class="scan-modal-btns" id="scanBtns" style="display:none">
+      <button class="scan-modal-btn scan-modal-btn-primary" id="scanSearchBtn" onclick="applyScanResult()">Search This Card</button>
+      <button class="scan-modal-btn scan-modal-btn-secondary" onclick="closeScanModal()">Cancel</button>
+    </div>
+    <div id="scanSpinner" style="margin:0 auto 8px;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite"></div>
+  </div>
+</div>
+
+<!-- ═══ SOLD TAB ═══ -->
+<div id="sold-view" class="view">
+  <div class="loader" id="sold-loader" style="display:none"><div class="spin"></div><div class="loader-txt">Loading sold cards...</div></div>
+  <div id="sold-inner" style="display:none">
+    <!-- Show Sales — deals recorded at shows -->
+    <div id="showSalesSection" style="display:none">
+      <div class="show-sales-header">
+        <div class="show-sales-title">🤝 Show Sales <span class="show-sales-badge" id="showSalesBadge"></span></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="show-sales-add" onclick="openQuickAdd()">+ Quick Add</button>
+          <button class="show-sales-email" onclick="emailDaySummary()">📧 Email Summary</button>
+          <button class="show-sales-new" onclick="newShow()">🆕 New Show</button>
+          <button class="show-sales-clear" onclick="clearShowSales()">Clear All</button>
+        </div>
+      </div>
+      <div id="showSalesGrid"></div>
+      <div class="show-sales-divider"></div>
+    </div>
+    <div class="summary-panel" id="sold-summary"></div>
+    <div class="toolbar">
+      <input class="search" id="sold-search" placeholder="Search player…" oninput="renderSold()">
+      <select class="sort" id="sold-sort" onchange="renderSold()"><option value="gain">Sort: Profit ↓</option><option value="val">Sort: Sale Value ↓</option><option value="year">Sort: Year ↓</option><option value="az">Sort: A–Z</option></select>
+      <button class="show-sales-add" onclick="openQuickAdd()" style="margin-left:auto">+ Quick Add</button>
+      <div class="count-lbl" id="sold-count"></div>
+    </div>
+    <div class="card-grid" id="sold-cardGrid"></div>
+  </div>
+</div>
+
+<!-- ═══ QUICK ADD SALE MODAL ═══ -->
+<div class="quick-add-modal" id="quickAddModal">
+  <div class="quick-add-box">
+    <div class="quick-add-title">+ Quick Add Sale</div>
+    <div class="quick-add-field">
+      <label class="quick-add-label">Player / Card Name *</label>
+      <input class="quick-add-input" id="qaPlayer" type="text" placeholder="e.g. Patrick Mahomes">
+    </div>
+    <div class="quick-add-field">
+      <label class="quick-add-label">Sale Price *</label>
+      <input class="quick-add-input price-input" id="qaPrice" type="number" placeholder="0.00">
+    </div>
+    <div class="quick-add-row">
+      <div class="quick-add-field">
+        <label class="quick-add-label">Year</label>
+        <input class="quick-add-input" id="qaYear" type="text" placeholder="e.g. 2021">
+      </div>
+      <div class="quick-add-field">
+        <label class="quick-add-label">Grade / Condition</label>
+        <input class="quick-add-input" id="qaGrade" type="text" placeholder="e.g. PSA 10">
+      </div>
+    </div>
+    <div class="quick-add-field">
+      <label class="quick-add-label">Set (optional)</label>
+      <input class="quick-add-input" id="qaSet" type="text" placeholder="e.g. Panini Prizm">
+    </div>
+    <div class="quick-add-btns">
+      <button class="quick-add-btn-secondary" onclick="closeQuickAdd()">Cancel</button>
+      <button class="quick-add-btn-primary" onclick="submitQuickAdd()">Record Sale</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ eBay ASK PRICE CALCULATOR MODAL ═══ -->
+<div class="ebay-modal" id="ebayModal" onclick="if(event.target===this)closeEbayCalc()">
+  <div class="ebay-modal-box">
+    <div class="ebay-modal-header">
+      <div class="ebay-modal-title-wrap">
+        <div class="ebay-modal-icon">e<span style="color:#0064D2">b</span><span style="color:#F5AF02">a</span><span style="color:#86B817">y</span></div>
+        <div style="min-width:0">
+          <div class="ebay-modal-title">Ask Price Calculator</div>
+          <div class="ebay-modal-sub">What should I list this card for?</div>
+        </div>
+      </div>
+      <button class="ebay-modal-close" onclick="closeEbayCalc()">✕</button>
+    </div>
+    <div class="ebay-modal-body">
+      <div class="ebay-card-info">
+        <div class="ebay-card-name" id="ebayCardName">—</div>
+        <div class="ebay-card-set" id="ebayCardSet">—</div>
+        <div class="ebay-card-val-lbl">Current Market Value</div>
+        <div class="ebay-card-val" id="ebayCardVal">—</div>
+      </div>
+
+      <div class="ebay-input-label">Scenario</div>
+      <div class="ebay-scenarios">
+        <button class="ebay-scenario-btn" id="ebayScnMarket" onclick="setEbayScenario('market')">
+          <div class="ebay-scenario-lbl">Net Market</div>
+          <div class="ebay-scenario-val" id="ebayScnMarketVal">—</div>
+        </button>
+        <button class="ebay-scenario-btn" id="ebayScnFloor" onclick="setEbayScenario('floor')">
+          <div class="ebay-scenario-lbl">Net Floor</div>
+          <div class="ebay-scenario-val" id="ebayScnFloorVal">—</div>
+        </button>
+        <button class="ebay-scenario-btn" id="ebayScnCustom" onclick="setEbayScenario('custom')">
+          <div class="ebay-scenario-lbl">Custom</div>
+          <div class="ebay-scenario-val">✎</div>
+        </button>
+      </div>
+
+      <div class="ebay-input-row">
+        <div class="ebay-input-label">
+          <span>I want to net (take home)</span>
+          <span class="ebay-input-hint" id="ebayTargetHint">after eBay fees &amp; shipping</span>
+        </div>
+        <div class="ebay-input-wrap">
+          <span class="ebay-input-prefix">$</span>
+          <input class="ebay-input" id="ebayTargetNet" type="number" inputmode="decimal" step="1" oninput="recalcEbay()" onfocus="this.select()">
+        </div>
+      </div>
+
+      <div class="ebay-result">
+        <div class="ebay-result-label">List price on eBay</div>
+        <div class="ebay-result-val" id="ebayAskResult">—</div>
+        <div class="ebay-result-sub" id="ebayAskSub">—</div>
+      </div>
+
+      <div class="ebay-breakdown">
+        <div class="ebay-breakdown-title">Breakdown</div>
+        <div class="ebay-breakdown-row">
+          <span class="ebay-breakdown-lbl">Buyer pays</span>
+          <span class="ebay-breakdown-val" id="ebayBdGross">—</span>
+        </div>
+        <div class="ebay-breakdown-row">
+          <span class="ebay-breakdown-lbl">eBay fee <span id="ebayBdFeePct" style="opacity:.65"></span></span>
+          <span class="ebay-breakdown-val red" id="ebayBdFee">—</span>
+        </div>
+        <div class="ebay-breakdown-row">
+          <span class="ebay-breakdown-lbl">Per-order fee</span>
+          <span class="ebay-breakdown-val red" id="ebayBdPerOrder">—</span>
+        </div>
+        <div class="ebay-breakdown-row">
+          <span class="ebay-breakdown-lbl">Shipping cost</span>
+          <span class="ebay-breakdown-val red" id="ebayBdShip">—</span>
+        </div>
+        <div class="ebay-breakdown-row total">
+          <span class="ebay-breakdown-lbl">You net</span>
+          <span class="ebay-breakdown-val green" id="ebayBdNet">—</span>
+        </div>
+      </div>
+
+      <button class="ebay-settings-btn" onclick="toggleEbaySettings()" id="ebaySettingsToggle">⚙ Fee &amp; shipping settings</button>
+      <div class="ebay-settings-panel" id="ebaySettingsPanel">
+        <div class="ebay-settings-title">Your eBay setup</div>
+        <div class="ebay-settings-grid">
+          <div class="ebay-input-row">
+            <div class="ebay-input-label">Fee rate %</div>
+            <div class="ebay-input-wrap">
+              <input class="ebay-input" id="ebaySetFeePct" type="number" inputmode="decimal" step="0.01" oninput="saveEbaySettings();recalcEbay();refreshCardAskPrices()" style="padding-left:12px" onfocus="this.select()">
+            </div>
+          </div>
+          <div class="ebay-input-row">
+            <div class="ebay-input-label">Per-order fee</div>
+            <div class="ebay-input-wrap">
+              <span class="ebay-input-prefix">$</span>
+              <input class="ebay-input" id="ebaySetPerOrder" type="number" inputmode="decimal" step="0.05" oninput="saveEbaySettings();recalcEbay();refreshCardAskPrices()" onfocus="this.select()">
+            </div>
+          </div>
+          <div class="ebay-input-row">
+            <div class="ebay-input-label">Shipping cost</div>
+            <div class="ebay-input-wrap">
+              <span class="ebay-input-prefix">$</span>
+              <input class="ebay-input" id="ebaySetShip" type="number" inputmode="decimal" step="0.25" oninput="saveEbaySettings();recalcEbay();refreshCardAskPrices()" onfocus="this.select()">
+            </div>
+          </div>
+          <div class="ebay-input-row">
+            <div class="ebay-input-label">Extra buffer %</div>
+            <div class="ebay-input-wrap">
+              <input class="ebay-input" id="ebaySetBuffer" type="number" inputmode="decimal" step="0.5" oninput="saveEbaySettings();recalcEbay();refreshCardAskPrices()" style="padding-left:12px" onfocus="this.select()">
+            </div>
+          </div>
+        </div>
+        <button class="ebay-settings-reset" onclick="resetEbaySettings()">Reset to defaults (13.25% · $0.40 · $5 ship · 0% buffer)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SHEET_ID='13_CgXI-QrFUpEbfN3muf2U-WTCFC0gh87SGwtVvbuYU';
+const API_KEY='AIzaSyAbgYYo19vP17EllM6sa6PyRONu4Hekw1o';
+const SPORTS=['Basketball','Football','Baseball','Hockey','Soccer','Golf','Tennis','Pokemon','Disney','UFC/MMA','WWE','Marvel'];
+const META={
+  Basketball:{e:'🏀',c:'#1D4ED8',l:'#DBEAFE'},Football:{e:'🏈',c:'#15803D',l:'#DCFCE7'},
+  Baseball:{e:'⚾',c:'#B91C1C',l:'#FEE2E2'},Hockey:{e:'🏒',c:'#1E40AF',l:'#EFF6FF'},
+  Soccer:{e:'⚽',c:'#065F46',l:'#ECFDF5'},Golf:{e:'⛳',c:'#78350F',l:'#FEF3C7'},
+  Tennis:{e:'🎾',c:'#4D7C0F',l:'#F7FEE7'},Pokemon:{e:'🎴',c:'#B45309',l:'#FEF3C7'},
+  Disney:{e:'🎬',c:'#7E22CE',l:'#F3E8FF'},'UFC/MMA':{e:'🥊',c:'#C2410C',l:'#FFF7ED'},
+  WWE:{e:'🤼',c:'#6D28D9',l:'#EDE9FE'},Marvel:{e:'🦸',c:'#9D174D',l:'#FCE7F3'},
+};
+let collCards=[],saleCards=[],soldCards=[];
+let curTab='allcards';
+let state={c:{sport:null,player:null,filter:null},s:{sport:null,player:null,filter:null},a:{sport:null,player:null,filter:null}};
+const $=id=>document.getElementById(id);
+const fm=v=>'$'+Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+function allCards(){return[...collCards.map(c=>({...c,_src:'collection'})),...saleCards.map(c=>({...c,_src:'forsale'}))];}
+
+function condCls(c){
+  const u=String(c).toUpperCase();
+  if(u.includes('PSA 10')||u.includes('BGS 9.5')||u.includes('SGC 10'))return'gem';
+  if(u.includes('PSA 9')||u.includes('BGS 9'))return'mint';
+  if(u.includes('PSA 8')||u.includes('BGS 8'))return'nm';
+  if(/PSA [4567]/.test(u))return'mid';
+  if(u.includes('PSA')||u.includes('BGS')||u.includes('SGC'))return'low';
+  return'raw';
+}
+function olCls(o){
+  if(o==='Strong Buy')return'ol-sb';if(o==='Hold')return'ol-h';
+  if(o==='Watch')return'ol-w';if(o==='Sell')return'ol-s';return'ol-h';
+}
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));$(id).classList.add('active');}
+
+function buildCertSection(c){
+  const slab=c.slab||'';
+  const clean=slab.replace(/\D/g,'');
+  const ebayQ=encodeURIComponent([c.pl,c.yr,c.st,c.con].filter(Boolean).join(' '));
+  const ebayLink=`https://www.ebay.com/sch/i.html?_nkw=${ebayQ}&LH_Sold=1&LH_Complete=1`;
+  if(!slab||!clean){
+    return`<div class="c-cert-simple"><span></span><a class="c-cert-lookup" href="${ebayLink}" target="_blank">📦 eBay Comps ↗</a></div>`;
+  }
+  const u=String(c.con||'').toUpperCase();
+  let lookupUrl,graderLabel;
+  if(u.includes('BGS')||u.includes('BCCG')){lookupUrl=`https://www.beckett.com/grading/certlookup?certNumber=${clean}`;graderLabel='BGS';}
+  else if(u.includes('SGC')){lookupUrl=`https://www.gosgc.com/cert-code-lookup`;graderLabel='SGC';}
+  else{lookupUrl=`https://www.psacard.com/cert/${clean}`;graderLabel='PSA';}
+  return`<div class="c-cert-simple">
+    <div class="c-cert-simple-row">
+      <span class="c-serial-label">Cert #</span>
+      <span class="c-serial-num">${slab}</span>
+      <span class="c-cert-grader-badge">${graderLabel}</span>
+    </div>
+    <div class="c-cert-simple-links">
+      <a class="c-cert-lookup" href="${lookupUrl}" target="_blank">🔍 Verify ${graderLabel} ↗</a>
+      <a class="c-cert-lookup" href="${ebayLink}" target="_blank">📦 eBay Comps ↗</a>
+    </div>
+  </div>`;
+}
+
+function buildCardHTML(c,i,showSource){
+  const gc=c.gain>=0?'up':'dn';
+  const m=META[c.cat]||{c:'#D4930F'};
+  const pp=c.proj>2?Math.round(c.proj):Math.round(c.proj*100);
+  const rawGpct=c.cost>0?(c.gain/c.cost*100):0;
+  const gpct=Math.abs(rawGpct)>999?(rawGpct>0?'>+999%':'>-999%'):(rawGpct>=0?'+':'')+rawGpct.toFixed(1)+'%';
+  const setStr=[c.yr,c.st].filter(Boolean).join(' ')+(c.num?' #'+c.num:'');
+  const hasFloor=c.floorPrice>0;
+  const hasShow=c.showPrice>0;
+  const pricingClass=(hasFloor&&hasShow)?'c-pricing-grid-3':'c-pricing-grid';
+  const sourceBadge=showSource&&c._src?`<span class="c-source-badge ${c._src==='collection'?'c-source-coll':'c-source-sale'}">${c._src==='collection'?'COLLECTION':'FOR SALE'}</span>`:'';
+  const slabClean=(c.slab||'').replace(/\D/g,'');
+  const _sales=getShowSales();
+  const soldAtShow=_sales.some(sale=>sale.cards.some(sc=>{if(slabClean&&sc.slab)return sc.slab.replace(/\D/g,'')===slabClean;return sc.yr===c.yr&&sc.st===c.st;}));
+  const isSell = c.ol === 'Sell';
+  // eBay ask price — what to list at to net current value after fees+shipping
+  const ebayAsk = c.val>0 ? calcEbayAskPrice(c.val) : 0;
+  // outlook dot class for list mode
+  const olDotCls = c.ol==='Strong Buy'?'sb':c.ol==='Sell'?'s':c.ol==='Watch'?'w':'h';
+  // card index for eBay modal lookup
+  const cardKey = `${c.pl}|${c.yr}|${c.st}|${c.num}|${c.slab}`;
+  return`<div class="c${soldAtShow?' sold-at-show':''}${isSell?' outlook-sell':''}" data-slab="${c.slab||''}" data-set="${c.st||''}" data-yr="${c.yr||''}" data-cardkey="${encodeURIComponent(cardKey)}" style="animation-delay:${Math.min(i*25,400)}ms">
+    ${soldAtShow?'<div class="c-sold-show-badge"><div class="c-sold-show-label">SOLD AT SHOW</div></div>':''}
+    ${isSell?'<div class="sell-urgency-banner">⚡ Move this card — Sell signal</div>':''}
+    <div class="c-stripe" style="background:${isSell?'#F43F5E':m.c}"></div>
+    <div class="c-top">
+      <span class="c-outlook-dot ${olDotCls}" title="${c.ol||'Hold'}"></span>
+      <div style="min-width:0;flex:1"><div class="c-player-name">${c.pl}${sourceBadge}</div><div class="c-set" title="${setStr}">${setStr}</div></div>
+      <div class="c-show-inline">
+        <div class="c-show-inline-price-col">
+          ${hasShow?`<span class="c-show-inline-price">${fm(c.showPrice)}</span>`:''}
+          ${hasFloor?`<span class="c-show-inline-floor">Floor ${fm(c.floorPrice)}</span>`:''}
+        </div>
+      </div>
+      <span class="cond ${condCls(c.con)}">${c.con||'RAW'}</span>
+    </div>
+    <div class="c-body">
+      <div class="c-val-row">
+        <div><div class="c-val-lbl">Market Value</div><div class="c-val">${fm(c.val)}</div></div>
+        <div class="c-gain-block">
+          <div class="c-gain ${gc}">${c.gain>=0?'+':'-'}${fm(Math.abs(c.gain))}</div>
+          <div class="c-gpct ${gc}">${gpct}</div>
+        </div>
+      </div>
+      <div class="c-show-pricing-highlight">
+        <div class="c-show-price-big">
+          <div class="c-stat-l">Show Price</div>
+          <div class="c-show-price-val">${hasShow?fm(c.showPrice):'—'}</div>
+        </div>
+        <div class="c-floor-price-big">
+          <div class="c-stat-l">Floor</div>
+          <div class="c-floor-price-val">${hasFloor?fm(c.floorPrice):'—'}</div>
+        </div>
+      </div>
+      <div class="show-quick-stats">
+        <div class="show-quick-stat">
+          <span class="show-quick-stat-lbl">Paid</span>
+          <span class="show-quick-stat-val">${fm(c.cost)}</span>
+        </div>
+        ${c.cost>0?`<span class="show-quick-gain ${gc}">${c.gain>=0?'+':''}${gpct.replace('>','')}</span>`:''}
+      </div>
+      <div class="c-pricing-grid" style="margin-bottom:12px">
+        <div class="c-stat"><div class="c-stat-l">Cost Basis</div><div class="c-stat-v">${fm(c.cost)}</div></div>
+        <div class="c-stat"><div class="c-stat-l">6-Mo Projection</div><div class="c-stat-v blue">${c.s6>0?fm(c.s6):'—'}</div></div>
+      </div>
+    </div>
+    ${c.val>0?`<div class="c-ebay-block" onclick="event.stopPropagation();openEbayCalc(this.closest('.c').dataset.cardkey)">
+      <div class="c-ebay-left">
+        <div class="c-ebay-icon">e<span style="color:#0064D2">b</span><span style="color:#F5AF02">a</span><span style="color:#86B817">y</span></div>
+        <div>
+          <div class="c-ebay-label">Ask Price</div>
+          <div class="c-ebay-sublabel">To net ${fm(c.val)} after fees</div>
+        </div>
+      </div>
+      <div class="c-ebay-right">
+        <div class="c-ebay-ask">${fm(ebayAsk)}</div>
+        <div class="c-ebay-net">Tap to customize →</div>
+      </div>
+    </div>`:''}
+    <div class="c-foot">
+      <span class="ol ${olCls(c.ol)}">${c.ol||'Hold'}</span>
+      <span class="c-proj">Proj <b class="${pp<0?'neg':''}">${pp>=0?'+':''}${pp}%</b>/yr</span>
+    </div>
+    ${buildCertSection(c)}
+  </div>`;
+}
+
+async function fetchTab(tabName){
+  const r=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(tabName)}?key=${API_KEY}`);
+  if(!r.ok)throw new Error('API '+r.status);
+  const d=await r.json();
+  const rows=d.values||[];
+  if(rows.length<3)return[];
+  const h=rows[1].map(x=>String(x).trim());
+  const ci=n=>h.indexOf(n);
+  const iP=ci('Player'),iY=ci('Year'),iS=ci('Set / Variation'),iN=ci('Card #');
+  const iCat=ci('Category'),iCon=ci('Condition'),iSl=ci('Slab Serial #');
+  const iCost=ci('Total Cost (w/ Fees)'),iVal=ci('Current Value');
+  const iG=ci('Gain $'),iGP=ci('Gain %'),iOl=ci('Market Outlook'),iPr=ci('Annual Proj. %');
+  const i6=ci('6-Month Projected'),i12=ci('12-Month Projected'),i18=ci('18-Month Projected'),iSold=ci('SOLD?');
+  const iShow=ci('Show Price'),iFloor=ci('Floor Price');
+  const cards=[];
+  for(let i=2;i<rows.length;i++){
+    const row=rows[i];
+    if(!row||!row[iP])continue;
+    const pl=String(row[iP]||'').trim();
+    if(!pl||pl==='TOTALS')continue;
+    if(String(row[iSold]||'').trim().toUpperCase()==='SOLD')continue;
+    const clean=pl.replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}⚾🏀🏈🏒⚽⛳🎾🎴🎬🥊🤼🦸🃏]\s+/u,'').trim();
+    const n=s=>parseFloat(String(s||'0').replace(/[$,%]/g,''))||0;
+    cards.push({
+      pl:clean,yr:String(row[iY]||'').trim(),st:String(row[iS]||'').trim(),
+      num:String(row[iN]||'').trim(),cat:String(row[iCat]||'').trim(),
+      con:String(row[iCon]||'').trim(),slab:String(row[iSl]||'').trim(),
+      cost:n(row[iCost]),val:n(row[iVal]),gain:n(row[iG]),
+      gainPct:n(row[iGP]),proj:n(row[iPr]),s6:n(row[i6]),s12:n(row[i12]),s18:n(row[i18]),
+      ol:String(row[iOl]||'').trim(),
+      showPrice:iShow>=0?n(row[iShow]):0,
+      floorPrice:iFloor>=0?n(row[iFloor]):0,
+    });
+  }
+  return cards;
+}
+
+async function fetchSold(){
+  try{
+    const r=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent('Sold')}?key=${API_KEY}`);
+    if(!r.ok)return[];
+    const d=await r.json();
+    const rows=d.values||[];
+    if(rows.length<2)return[];
+    const h=rows[0].map(x=>String(x).trim());
+    const ci=n=>h.indexOf(n);
+    const iP=ci('Player'),iY=ci('Year'),iS=ci('Set / Variation'),iN=ci('Card #');
+    const iCat=ci('Category'),iCon=ci('Condition');
+    const iCost=ci('Total Cost (w/ Fees)'),iSalePrice=ci('Sale Price'),iProfit=ci('Profit $');
+    const cards=[];
+    for(let i=1;i<rows.length;i++){
+      const row=rows[i];
+      if(!row||!row[iP])continue;
+      const pl=String(row[iP]||'').trim();
+      if(!pl||pl==='TOTALS')continue;
+      const clean=pl.replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}⚾🏀🏈🏒⚽⛳🎾🎴🎬🥊🤼🦸🃏]\s+/u,'').trim();
+      const n=s=>parseFloat(String(s||'0').replace(/[$,%]/g,''))||0;
+      const salePrice=n(iSalePrice>=0?row[iSalePrice]:0);
+      const cost=n(row[iCost]);
+      const gain=iProfit>=0?n(row[iProfit]):(salePrice>0?salePrice-cost:0);
+      cards.push({pl:clean,yr:String(row[iY]||'').trim(),st:String(row[iS]||'').trim(),num:String(row[iN]||'').trim(),cat:String(row[iCat]||'').trim(),con:String(row[iCon]||'').trim(),cost,val:salePrice,gain,showPrice:salePrice,ol:'',slab:'',s6:0,s12:0,s18:0,proj:0,floorPrice:0});
+    }
+    return cards;
+  }catch(e){return[];}
+}
+
+async function load(){
+  try{
+    const[cCards,sCards,soCards]=await Promise.all([fetchTab('My Collection'),fetchTab('For Sale'),fetchSold()]);
+    collCards=cCards;saleCards=sCards;soldCards=soCards;
+    $('liveBadge').textContent='Updated · '+new Date().toLocaleDateString([],{month:'short',day:'numeric'})+' '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    const totalAll=cCards.length+sCards.length;
+    const abadge=$('allCardsBadge');
+    abadge.textContent=totalAll;abadge.style.display='inline-block';
+    const cbadge=$('collBadge');
+    if(cCards.length>0){cbadge.textContent=cCards.length;cbadge.style.display='inline-block';}else{cbadge.style.display='none';}
+    const badge=$('forSaleBadge');
+    if(sCards.length>0){badge.textContent=sCards.length;badge.style.display='inline-block';}else{badge.style.display='none';}
+    const sbadge=$('soldBadge');
+    if(soCards.length>0){sbadge.textContent=soCards.length;sbadge.style.display='inline-block';}else{sbadge.style.display='none';}
+    $('a-loader').style.display='none';
+    $('a-homeInner').style.display='block';
+    $('c-homeInner').style.display='block';
+    $('s-homeInner').style.display='block';
+    $('sold-inner').style.display='block';
+    setKPIs(allCards(),'ALL CARDS');
+    // Restore cash goal
+    const cgd = getCashGoalData();
+    if (cgd.goal && $('cashGoalInput')) $('cashGoalInput').value = cgd.goal;
+    refreshCashGoalUI();
+    // Show All Cards tab first so DOM elements are visible before rendering
+    showView('a-vHome');
+    requestAnimationFrame(()=>{
+      renderAllHome();
+      renderHome('c');renderHome('s');renderSold();renderShowSales();
+    });
+  }catch(e){$('a-loader').innerHTML=`<div class="empty-msg">⚠️ ${e.message}</div>`;}
+}
+
+function renderAllHome(){
+  const cards=allCards();
+  const grp={};
+  cards.forEach(c=>{if(!grp[c.cat])grp[c.cat]=[];grp[c.cat].push(c);});
+  const active=SPORTS.filter(s=>grp[s]&&grp[s].length>0).sort((a,b)=>grp[b].reduce((x,c)=>x+c.val,0)-grp[a].reduce((x,c)=>x+c.val,0));
+  const totalCards=cards.length;
+  const graded=cards.filter(c=>c.con&&!c.con.toUpperCase().includes('RAW')).length;
+  const raw=totalCards-graded;
+  $('a-summary').innerHTML=`
+    <div class="sum-card" onclick="drillAllFiltered('all','All Cards')"><div class="sum-label">Total Cards</div><div class="sum-val">${totalCards}</div><div class="sum-sub">${graded} graded · ${raw} raw</div></div>
+    <div class="sum-card" onclick="drillAllFiltered('collection','In Collection')"><div class="sum-label">In Collection</div><div class="sum-val">${collCards.length}</div><div class="sum-sub">not listed for sale</div></div>
+    <div class="sum-card" onclick="drillAllFiltered('forsale','For Sale')"><div class="sum-label">For Sale</div><div class="sum-val" style="color:var(--blue)">${saleCards.length}</div><div class="sum-sub">active listings</div></div>`;
+  $('a-insights').innerHTML='';
+  $('a-sportGrid').innerHTML=active.map(s=>{
+    const sc=grp[s];const m=META[s]||{e:'🃏',c:'#D4930F',l:'#FEF3C7'};
+    const tv=sc.reduce((x,c)=>x+c.val,0);const tc=sc.reduce((x,c)=>x+c.cost,0);const g=tv-tc;
+    const ret=tc>0?(g/tc*100):0;const retStr=(ret>=0?'+':'')+ret.toFixed(1)+'%';
+    const players=new Set(sc.map(c=>c.pl)).size;const playerNames=[...new Set(sc.map(c=>c.pl))];
+    const initials=n=>n.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+    const thumbsHtml=playerNames.slice(0,4).map(n=>`<div class="st-thumb" title="${n}">${initials(n)}</div>`).join('')+(playerNames.length>4?`<div class="st-thumb st-thumb-more">+${playerNames.length-4}</div>`:'');
+    const collCount=sc.filter(c=>c._src==='collection').length;
+    const saleCount=sc.filter(c=>c._src==='forsale').length;
+    return`<div class="sport-tile" onclick="drillSport('a','${s}')"><div class="st-bar" style="--tc:${m.c}"></div><div class="st-header"><div class="st-header-left"><span class="st-icon">${m.e}</span><div><div class="st-name">${s}</div><div class="st-pill">${players} player${players!==1?'s':''} · ${collCount} coll · ${saleCount} sale</div></div></div><div class="st-arrow">→</div></div><div class="st-thumbs">${thumbsHtml}</div><div class="st-body"><div class="st-val">${fm(tv)}</div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><div class="st-gain ${g>=0?'up':'dn'}">${g>=0?'▲':'▼'} ${fm(Math.abs(g))}</div><div class="st-ret ${g>=0?'up':'dn'}">${retStr} return</div></div></div></div>`;
+  }).join('');
+}
+
+
+function setKPIs(cards, ctx){
+  const tv=cards.reduce((s,c)=>s+c.val,0);
+  const tc=cards.reduce((s,c)=>s+c.cost,0);
+  const tg=tv-tc;const ret=tc>0?tg/tc*100:0;
+  const isForSale = ctx==='FOR SALE';
+  animateCounter($('kV'),tv,'$',2);
+  // For Sale: show total show price in the 3rd KPI slot instead of cost basis
+  if(isForSale){
+    const totalShow=cards.reduce((s,c)=>s+(c.showPrice>0?c.showPrice:c.val),0);
+    animateCounter($('kC'),totalShow,'$',2);
+    const lbl=$('kpi3Label');if(lbl)lbl.textContent='Total Show Price';
+  } else {
+    animateCounter($('kC'),tc,'$',2);
+    const lbl=$('kpi3Label');if(lbl)lbl.textContent='Total Cost';
+  }
+  const ge=$('kG');ge.className='kpi-v '+(tg>=0?'grn':'red');
+  animateCounter(ge,Math.abs(tg),(tg>=0?'+$':'-$'),2);
+  const re=$('kR');re.className='kpi-v '+(ret>=0?'grn':'red');
+  const startR=performance.now();const absRet=Math.abs(ret);const sign=ret>=0?'+':'-';
+  (function stepR(now){const p=Math.min((now-startR)/800,1);const e=1-Math.pow(1-p,3);re.textContent=sign+(absRet*e).toFixed(1)+'%';if(p<1)requestAnimationFrame(stepR);else re.textContent=sign+absRet.toFixed(1)+'%';})(startR);
+  const spark=$('kSparkline');
+  if(spark){const color=ret>=0?'#4ADE80':'#FB7185';const pts=ret>=0?'0,20 10,17 20,14 30,11 40,8 56,3':'0,3 10,6 20,10 30,14 40,17 56,20';spark.innerHTML=`<polyline points="${pts}" stroke="${color}" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="${pts} 56,22 0,22" fill="${color}" fill-opacity="0.15" stroke="none"/>`;}
+  // context label
+  const ctxLabel=$('kpiCtxLabel');const ctxCount=$('kpiCtxCount');
+  if(ctxLabel&&ctxCount){ctxLabel.textContent=ctx||'ALL CARDS';ctxCount.textContent=cards.length;}
+}
+
+function switchTab(tab){
+  curTab=tab;
+  $('tabAllCards').classList.toggle('active',tab==='allcards');
+  $('tabCollection').classList.toggle('active',tab==='collection');
+  $('tabForSale').classList.toggle('active',tab==='forsale');
+  $('tabSold').classList.toggle('active',tab==='sold');
+  if(tab==='sold'){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));$('sold-view').classList.add('active');setKPIs(soldCards,'SOLD');renderShowSales();return;}
+  if(tab==='allcards'){
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    $('a-vHome').classList.add('active');
+    setKPIs(allCards(),'ALL CARDS');
+    return;
+  }
+  const pfx=tab==='collection'?'c':'s';
+  const cards=tab==='collection'?collCards:saleCards;
+  const label=tab==='collection'?'COLLECTION':'FOR SALE';
+  setKPIs(cards,label);
+  const sport=state[pfx].sport,player=state[pfx].player;
+  if(player)showView(`${pfx}-vCards`);else if(sport)showView(`${pfx}-vPlayers`);else showView(`${pfx}-vHome`);
+}
+
+function renderHome(pfx){
+  const cards=pfx==='c'?collCards:saleCards;
+  const grp={};
+  cards.forEach(c=>{if(!grp[c.cat])grp[c.cat]=[];grp[c.cat].push(c);});
+  const active=SPORTS.filter(s=>grp[s]&&grp[s].length>0).sort((a,b)=>grp[b].reduce((x,c)=>x+c.val,0)-grp[a].reduce((x,c)=>x+c.val,0));
+  const totalCards=cards.length;
+  const graded=cards.filter(c=>c.con&&!c.con.toUpperCase().includes('RAW')).length;
+  const raw=totalCards-graded;
+  const strongBuy=cards.filter(c=>c.ol==='Strong Buy').length;
+  const watchSellCount=cards.filter(c=>c.ol==='Watch'||c.ol==='Sell').length;
+  const totalShow=cards.reduce((s,c)=>s+(c.showPrice>0?c.showPrice:c.val),0);
+  $(`${pfx}-summary`).innerHTML=`
+    <div class="sum-card" onclick="drillFiltered('${pfx}','all','All Cards')"><div class="sum-label">Total Cards</div><div class="sum-val">${totalCards}</div><div class="sum-sub">${graded} graded · ${raw} raw</div></div>
+    <div class="sum-card"><div class="sum-label">Total Show Price</div><div class="sum-val" style="color:var(--blue)">${fm(totalShow)}</div><div class="sum-sub">combined asking price</div></div>
+    <div class="sum-card" onclick="drillFiltered('${pfx}','watchsell','Watch / Sell')"><div class="sum-label">Watch / Sell</div><div class="sum-val" style="color:var(--red)">${watchSellCount}</div><div class="sum-sub">consider moving</div></div>`;
+  $(`${pfx}-insights`).innerHTML='';
+  $(`${pfx}-sportGrid`).innerHTML=active.map(s=>{
+    const sc=grp[s];const m=META[s]||{e:'🃏',c:'#D4930F',l:'#FEF3C7'};
+    const tv=sc.reduce((x,c)=>x+c.val,0);const tc=sc.reduce((x,c)=>x+c.cost,0);const g=tv-tc;
+    const ret=tc>0?(g/tc*100):0;const retStr=(ret>=0?'+':'')+ret.toFixed(1)+'%';
+    const players=new Set(sc.map(c=>c.pl)).size;const playerNames=[...new Set(sc.map(c=>c.pl))];
+    const initials=n=>n.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+    const thumbsHtml=playerNames.slice(0,4).map(n=>`<div class="st-thumb" title="${n}">${initials(n)}</div>`).join('')+(playerNames.length>4?`<div class="st-thumb st-thumb-more">+${playerNames.length-4}</div>`:'');
+    return`<div class="sport-tile" onclick="drillSport('${pfx}','${s}')"><div class="st-bar" style="--tc:${m.c}"></div><div class="st-header"><div class="st-header-left"><span class="st-icon">${m.e}</span><div><div class="st-name">${s}</div><div class="st-pill">${players} player${players!==1?'s':''} · ${sc.length} card${sc.length!==1?'s':''}</div></div></div><div class="st-arrow">→</div></div><div class="st-thumbs">${thumbsHtml}</div><div class="st-body"><div class="st-val">${fm(tv)}</div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><div class="st-gain ${g>=0?'up':'dn'}">${g>=0?'▲':'▼'} ${fm(Math.abs(g))}</div><div class="st-ret ${g>=0?'up':'dn'}">${retStr} return</div></div></div></div>`;
+  }).join('');
+}
+
+// Global search — 'a' prefix searches all cards (collection + for sale)
+function renderGlobalSearch(pfx){
+  let cards;
+  if(pfx==='a') cards=allCards();
+  else cards=pfx==='c'?collCards:saleCards;
+  const searchEl=$(`${pfx}-globalSearch`);
+  const resultsEl=$(`${pfx}-globalResults`);
+  if(!searchEl||!resultsEl)return;
+  const q=searchEl.value.toLowerCase().trim();
+  if(!q){resultsEl.classList.remove('open');return;}
+  const matches=cards.filter(c=>c.pl.toLowerCase().includes(q)||c.st.toLowerCase().includes(q)||c.yr.includes(q)).slice(0,8);
+  if(!matches.length){resultsEl.innerHTML='<div class="gr-empty">No cards found</div>';resultsEl.classList.add('open');return;}
+  resultsEl.innerHTML=matches.map(c=>{
+    const m=META[c.cat]||{e:'🃏'};const gc=c.gain>=0?'up':'dn';
+    const setStr=[c.yr,c.st].filter(Boolean).join(' ')+(c.num?' #'+c.num:'');
+    const srcLabel=pfx==='a'?(c._src==='collection'?'<span style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:var(--green-l);color:var(--green);margin-left:4px">COLL</span>':'<span style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#DBEAFE;color:#1E40AF;margin-left:4px">SALE</span>'):'';
+    // For all-cards search, clicking navigates to the correct tab
+    const onclick=pfx==='a'
+      ?`globalDrillAll('${c._src==='collection'?'c':'s'}','${c.cat}','${c.pl.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')`
+      :`globalDrill('${pfx}','${c.cat}','${c.pl.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')`;
+    return`<div class="gr-item" onclick="${onclick}"><div class="gr-left"><span class="gr-icon">${m.e}</span><div><div class="gr-name">${c.pl}${srcLabel}</div><div class="gr-set">${setStr}</div></div></div><div><div class="gr-val">${fm(c.val)}</div><div class="gr-gain ${gc}">${c.gain>=0?'+':'-'}${fm(Math.abs(c.gain))}</div></div></div>`;
+  }).join('');
+  resultsEl.classList.add('open');
+}
+
+function globalDrill(pfx,sport,player){$(`${pfx}-globalSearch`).value='';$(`${pfx}-globalResults`).classList.remove('open');state[pfx].sport=sport;state[pfx].player=player;$(`${pfx}-bcSport`).textContent=sport;$(`${pfx}-bcSport2`).textContent=sport;$(`${pfx}-bcPlayer`).textContent=player;showView(`${pfx}-vCards`);renderCards(pfx);window.scrollTo(0,0);}
+
+// All-cards search drills into the correct collection or for-sale tab
+function globalDrillAll(pfx,sport,player){
+  $('a-globalSearch').value='';$('a-globalResults').classList.remove('open');
+  // Switch to the right tab first
+  // Stay on allcards tab, drill into a-vCards
+  curTab='allcards';
+  $('tabAllCards').classList.add('active');
+  $('tabCollection').classList.remove('active');
+  $('tabForSale').classList.remove('active');
+  $('tabSold').classList.remove('active');
+  state['a'].sport=sport;state['a'].player=player;
+  $('a-bcSport').textContent=sport;$('a-bcSport2').textContent=sport;$('a-bcPlayer').textContent=player;
+  showView('a-vCards');renderCards('a');window.scrollTo(0,0);
+}
+
+document.addEventListener('click',function(e){['c','s','a'].forEach(pfx=>{const wrap=$(`${pfx}-globalSearch`);const results=$(`${pfx}-globalResults`);if(wrap&&results&&!wrap.contains(e.target)&&!results.contains(e.target))results.classList.remove('open');});});
+
+function drillFiltered(pfx,filter,label){state[pfx].filter=filter;$(`${pfx}-bcFiltered`).textContent=label;if($(`${pfx}-filteredSort`))$(`${pfx}-filteredSort`).value='val';history.pushState({pfx,view:'filtered',filter,label},'');showView(`${pfx}-vFiltered`);renderFiltered(pfx);window.scrollTo(0,0);}
+function renderFiltered(pfx){
+  const cards=pfx==='c'?collCards:saleCards;
+  const filter=state[pfx].filter||'all';const srt=$(`${pfx}-filteredSort`)?.value||'val';
+  let filtered;
+  if(filter==='all')filtered=[...cards];else if(filter==='Strong Buy')filtered=cards.filter(c=>c.ol==='Strong Buy');else if(filter==='watchsell')filtered=cards.filter(c=>c.ol==='Watch'||c.ol==='Sell');else filtered=[...cards];
+  filtered.sort((a,b)=>srt==='val'?b.val-a.val:srt==='gain'?b.gain-a.gain:srt==='year'?parseInt(b.yr)-parseInt(a.yr):a.pl.localeCompare(b.pl));
+  $(`${pfx}-filteredCount`).textContent=filtered.length+' card'+(filtered.length!==1?'s':'');
+  if(!filtered.length){$(`${pfx}-filteredGrid`).innerHTML='<div class="empty-msg">No cards found.</div>';return;}
+  $(`${pfx}-filteredGrid`).innerHTML=filtered.map((c,i)=>buildCardHTML(c,i)).join('');
+}
+
+function drillSport(pfx,sport){state[pfx].sport=sport;state[pfx].player=null;$(`${pfx}-bcSport`).textContent=sport;$(`${pfx}-bcSport2`).textContent=sport;$(`${pfx}-playerSearch`).value='';history.pushState({pfx,view:'players',sport},'');showView(`${pfx}-vPlayers`);renderPlayers(pfx);window.scrollTo(0,0);}
+
+function renderPlayers(pfx){
+  let cards=pfx==='a'?allCards():pfx==='c'?collCards:saleCards;const sport=state[pfx].sport;
+  const q=$(`${pfx}-playerSearch`).value.toLowerCase();const srt=$(`${pfx}-playerSort`).value;
+  if(pfx==='a'){const srcF=document.getElementById('a-playerSrcFilter')?.value||'all';if(srcF==='collection')cards=cards.filter(c=>c._src==='collection');else if(srcF==='forsale')cards=cards.filter(c=>c._src==='forsale');}
+  const m=META[sport]||{c:'#D4930F'};const sportCards=cards.filter(c=>c.cat===sport);
+  const tv=sportCards.reduce((s,c)=>s+c.val,0);const tc=sportCards.reduce((s,c)=>s+c.cost,0);
+  const graded=sportCards.filter(c=>c.con&&!c.con.toUpperCase().includes('RAW')).length;
+  const bestCard=[...sportCards].sort((a,b)=>b.gain-a.gain)[0];
+  const collSC=sportCards.filter(c=>c._src==='collection').length;const saleSC=sportCards.filter(c=>c._src==='forsale').length;
+  const srcBreakdown=pfx==='a'?`<div class="ssb-stat"><div class="ssb-label">Collection</div><div class="ssb-val">${collSC}</div></div><div class="ssb-stat"><div class="ssb-label">For Sale</div><div class="ssb-val" style="color:var(--blue)">${saleSC}</div></div>`:'';
+  $(`${pfx}-sportSummary`).innerHTML=`<div class="ssb-stat"><div class="ssb-label">Total Value</div><div class="ssb-val">${fm(tv)}</div></div><div class="ssb-stat"><div class="ssb-label">Total Gain</div><div class="ssb-val ${tv-tc>=0?'green':'red'}">${tv-tc>=0?'+':'-'}${fm(Math.abs(tv-tc))}</div></div><div class="ssb-stat"><div class="ssb-label">Cards</div><div class="ssb-val">${sportCards.length}</div></div><div class="ssb-stat"><div class="ssb-label">Graded</div><div class="ssb-val">${graded}</div></div>${srcBreakdown}${bestCard?`<div class="ssb-stat"><div class="ssb-label">Best Card</div><div class="ssb-val" style="font-size:13px;font-weight:700">${bestCard.pl}</div></div>`:''}` ;
+  const grp={};sportCards.forEach(c=>{if(!grp[c.pl])grp[c.pl]=[];grp[c.pl].push(c);});
+  let players=Object.keys(grp);if(q)players=players.filter(p=>p.toLowerCase().includes(q));
+  players.sort((a,b)=>{if(srt==='val')return grp[b].reduce((s,c)=>s+c.val,0)-grp[a].reduce((s,c)=>s+c.val,0);if(srt==='gain')return grp[b].reduce((s,c)=>s+c.gain,0)-grp[a].reduce((s,c)=>s+c.gain,0);if(srt==='gainpct'){const gp=p=>{const tc=grp[p].reduce((s,c)=>s+c.cost,0);const g=grp[p].reduce((s,c)=>s+c.gain,0);return tc>0?g/tc:0;};return gp(b)-gp(a);}if(srt==='cards')return grp[b].length-grp[a].length;return a.localeCompare(b);});
+  $(`${pfx}-playerCount`).textContent=players.length+' player'+(players.length!==1?'s':'');
+  const maxVal=Math.max(...players.map(p=>grp[p].reduce((s,c)=>s+c.val,0)));
+  $(`${pfx}-playerGrid`).innerHTML=players.map((pl,i)=>{
+    const pc=grp[pl];const tv=pc.reduce((s,c)=>s+c.val,0);const tc=pc.reduce((s,c)=>s+c.cost,0);const g=tv-tc;
+    const pct=maxVal>0?Math.round(tv/maxVal*100):0;
+    const uniqueCons=[...new Set(pc.map(c=>c.con||'Raw'))];
+    const condTags=uniqueCons.slice(0,4).map(con=>`<span class="pt-cond-tag ${condCls(con)}">${con.length>10?con.substring(0,9)+'…':con}</span>`).join('');
+    const olCounts={};pc.forEach(c=>{if(c.ol)olCounts[c.ol]=(olCounts[c.ol]||0)+1;});
+    const domOl=Object.entries(olCounts).sort((a,b)=>b[1]-a[1])[0]?.[0]||'Hold';
+    const tileSelClass=domOl==='Sell'?' outlook-sell':'';
+    return`<div class="player-tile${tileSelClass}" style="--tc:${domOl==='Sell'?'#F43F5E':m.c};animation-delay:${Math.min(i*18,400)}ms" onclick="drillPlayer('${pfx}','${pl.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')"><div class="pt-accent"></div><div class="pt-inner"><div class="pt-top"><div class="pt-name">${pl}</div><span class="pt-count">${pc.length} card${pc.length!==1?'s':''}</span></div><div class="pt-val">${fm(tv)}</div><div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap"><div class="pt-gain ${g>=0?'up':'dn'}">${g>=0?'▲':'▼'} ${fm(Math.abs(g))}</div><span class="ol ${olCls(domOl)}" style="font-size:10px;padding:3px 9px">${domOl}</span></div><div class="pt-cond-row">${condTags}</div><div class="pt-bar-wrap"><div class="pt-bar-label"><span class="pt-bar-lbl-txt">% of top</span><span class="pt-bar-lbl-pct">${pct}%</span></div><div class="pt-bar"><div class="pt-bar-fill" style="width:${pct}%"></div></div></div></div><div class="pt-arrow">→</div></div>`;
+  }).join('');
+}
+
+function drillPlayer(pfx,player){state[pfx].player=player;$(`${pfx}-bcPlayer`).textContent=player;$(`${pfx}-cardSort`).value='val';history.pushState({pfx,view:'cards',sport:state[pfx].sport,player},'');showView(`${pfx}-vCards`);renderCards(pfx);window.scrollTo(0,0);}
+
+function renderCards(pfx){
+  const cards=pfx==='a'?allCards():pfx==='c'?collCards:saleCards;const sport=state[pfx].sport;const player=state[pfx].player;const srt=$(`${pfx}-cardSort`).value;
+  let filtered=cards.filter(c=>c.cat===sport&&c.pl===player);
+  filtered.sort((a,b)=>srt==='val'?b.val-a.val:srt==='gain'?b.gain-a.gain:srt==='price'?b.showPrice-a.showPrice:parseInt(b.yr)-parseInt(a.yr));
+  $(`${pfx}-cardCount`).textContent=filtered.length+' card'+(filtered.length!==1?'s':'');
+  if(!filtered.length){$(`${pfx}-cardGrid`).innerHTML='<div class="empty-msg">No cards found.</div>';return;}
+  $(`${pfx}-cardGrid`).innerHTML=filtered.map((c,i)=>buildCardHTML(c,i,pfx==='a')).join('');
+  // Reapply show-mode class if active (For Sale tab only)
+  if(pfx==='s'&&showModeActive){$('s-cardGrid').classList.add('show-mode');}
+}
+
+function drillAllFiltered(src,label){
+  // Reuse the a-vFiltered view pattern — build it inline in a-vCards with breadcrumb
+  const cards=src==='collection'?collCards.map(c=>({...c,_src:'collection'})):src==='forsale'?saleCards.map(c=>({...c,_src:'forsale'})):allCards();
+  cards.sort((a,b)=>b.val-a.val);
+  // Show in a temporary filtered view using a-vCards slot
+  state['a'].sport='__filtered__';state['a'].player=label;
+  $('a-bcSport').textContent='All Cards';$('a-bcSport2').textContent='All Cards';$('a-bcPlayer').textContent=label;
+  $('a-cardCount').textContent=cards.length+' card'+(cards.length!==1?'s':'');
+  $('a-cardGrid').innerHTML=cards.map((c,i)=>buildCardHTML(c,i,true)).join('');
+  showView('a-vCards');window.scrollTo(0,0);
+}
+
+function renderSold(){
+  const cards=soldCards;const q=$('sold-search')?.value.toLowerCase()||'';const srt=$('sold-sort')?.value||'gain';
+  let filtered=cards.filter(c=>!q||c.pl.toLowerCase().includes(q)||c.st.toLowerCase().includes(q));
+  filtered.sort((a,b)=>srt==='gain'?b.gain-a.gain:srt==='val'?b.val-a.val:srt==='year'?parseInt(b.yr)-parseInt(a.yr):a.pl.localeCompare(b.pl));
+  $('sold-count').textContent=filtered.length+' card'+(filtered.length!==1?'s':'');
+  const totalProfit=cards.reduce((s,c)=>s+c.gain,0);const totalCost=cards.reduce((s,c)=>s+c.cost,0);const totalVal=cards.reduce((s,c)=>s+c.val,0);const retPct=totalCost>0?(totalProfit/totalCost*100):0;
+  $('sold-summary').innerHTML=`<div class="sum-card"><div class="sum-label">Cards Sold</div><div class="sum-val">${cards.length}</div><div class="sum-sub">total exits</div></div><div class="sum-card"><div class="sum-label">Total Sold Value</div><div class="sum-val">${fm(totalVal)}</div><div class="sum-sub">at time of sale</div></div><div class="sum-card"><div class="sum-label">Realized Profit</div><div class="sum-val" style="color:var(--green)">${totalProfit>=0?'+':''}${fm(totalProfit)}</div><div class="sum-sub">after cost basis</div></div><div class="sum-card"><div class="sum-label">Avg Return</div><div class="sum-val" style="color:var(--green)">${retPct>=0?'+':''}${retPct.toFixed(1)}%</div><div class="sum-sub">on sold cards</div></div>`;
+  if(!filtered.length){$('sold-cardGrid').innerHTML='<div class="empty-msg">No sold cards found — mark cards as SOLD in your sheet to see them here.</div>';return;}
+  $('sold-cardGrid').innerHTML=filtered.map((c,i)=>{
+    const gc=c.gain>=0?'up':'dn';const m=META[c.cat]||{c:'#888'};const setStr=[c.yr,c.st].filter(Boolean).join(' ')+(c.num?' #'+c.num:'');
+    return`<div class="c" style="animation-delay:${Math.min(i*25,400)}ms;opacity:0.92"><div class="c-stripe" style="background:${m.c}"></div><div class="c-top"><div><div class="c-player-name">${c.pl}</div><div class="c-set" title="${setStr}">${setStr}</div></div><span class="cond ${condCls(c.con)}">${c.con||'RAW'}</span></div><div class="c-body"><div class="c-val-row"><div><div class="c-val-lbl">Sale Value</div><div class="c-val">${fm(c.val)}</div></div><div class="c-gain-block"><div class="c-gain ${gc}">${c.gain>=0?'+':'-'}${fm(Math.abs(c.gain))}</div><div class="c-gpct ${gc}" style="font-size:12px;font-weight:600;margin-top:2px">${c.cost>0?((c.gain/c.cost>=0?'+':'')+(c.gain/c.cost*100).toFixed(1)+'%'):'—'}</div></div></div><div class="c-stats"><div class="c-stat"><div class="c-stat-l">Cost Basis</div><div class="c-stat-v">${fm(c.cost)}</div></div><div class="c-stat"><div class="c-stat-l">Category</div><div class="c-stat-v">${META[c.cat]?.e||''} ${c.cat}</div></div></div></div><div class="c-foot" style="background:#F5F3FF"><span style="font-size:12px;font-weight:800;padding:6px 14px;border-radius:20px;background:#EDE9FE;color:#6D28D9">SOLD</span><span></span></div></div>`;
+  }).join('');
+}
+
+function goLogoHome(){
+  if(curTab==='allcards'){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));$('a-vHome').classList.add('active');setKPIs(allCards(),'ALL CARDS');return;}
+  const pfx=curTab==='collection'?'c':'s';goHome(pfx);
+}
+function goHome(pfx){state[pfx].sport=null;state[pfx].player=null;state[pfx].filter=null;const cards=pfx==='a'?allCards():pfx==='c'?collCards:saleCards;const label=pfx==='a'?'ALL CARDS':pfx==='c'?'COLLECTION':'FOR SALE';setKPIs(cards,label);showView(`${pfx}-vHome`);window.scrollTo(0,0);}
+function goPlayers(pfx){state[pfx].player=null;showView(`${pfx}-vPlayers`);renderPlayers(pfx);window.scrollTo(0,0);}
+function toggleSignalExtra(pfx){const el=document.getElementById(`${pfx}-signalExtra`);const btn=document.getElementById(`${pfx}-signalViewAll`);if(!el||!btn)return;const open=el.style.display!=='none';el.style.display=open?'none':'block';btn.textContent=open?`View all ${btn.dataset.total||''} signals ↓`:'Show less ↑';}
+
+window.addEventListener('popstate',function(e){
+  const s=e.state;if(!s){goHome('c');return;}const pfx=s.pfx||'c';
+  if(s.view==='filtered'&&s.filter){state[pfx].filter=s.filter;$(`${pfx}-bcFiltered`).textContent=s.label||s.filter;showView(`${pfx}-vFiltered`);renderFiltered(pfx);}
+  else if(s.view==='cards'&&s.sport&&s.player){state[pfx].sport=s.sport;state[pfx].player=s.player;$(`${pfx}-bcSport`).textContent=s.sport;$(`${pfx}-bcSport2`).textContent=s.sport;$(`${pfx}-bcPlayer`).textContent=s.player;showView(`${pfx}-vCards`);renderCards(pfx);}
+  else if(s.view==='players'&&s.sport){state[pfx].sport=s.sport;state[pfx].player=null;$(`${pfx}-bcSport`).textContent=s.sport;$(`${pfx}-bcSport2`).textContent=s.sport;showView(`${pfx}-vPlayers`);renderPlayers(pfx);}
+  else{goHome(pfx);}window.scrollTo(0,0);
+});
+
+function toggleDark(){document.body.classList.toggle('dark');const isDark=document.body.classList.contains('dark');$('themeIcon').textContent=isDark?'🌙':'☀️';document.cookie='cardPortfolioDark='+(isDark?'1':'0')+';path=/;max-age=31536000';}
+if(document.cookie.includes('cardPortfolioDark=1')){document.body.classList.add('dark');document.addEventListener('DOMContentLoaded',()=>{const ti=$('themeIcon');if(ti)ti.textContent='🌙';});}
+
+function animateCounter(el,target,prefix='$',decimals=2,duration=800){
+  const start=performance.now();const isNeg=target<0;const abs=Math.abs(target);
+  function step(now){const elapsed=now-start;const progress=Math.min(elapsed/duration,1);const ease=1-Math.pow(1-progress,3);const current=abs*ease;el.textContent=prefix+(isNeg?'-':'')+current.toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});if(progress<1)requestAnimationFrame(step);else el.textContent=prefix+(isNeg?'-':'')+abs.toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});}
+  requestAnimationFrame(step);
+}
+
+
+
+// ═══ CAMERA SCAN ════════════════════════════════════════════
+// 👇 Replace this with your Cloudflare Worker URL after deploying
+const SCAN_WORKER_URL = 'https://card-scan.justin-c8d.workers.dev';
+
+let scanTargetPfx = 'a';
+let scanResultData = null;
+
+function openScanner(pfx) {
+  scanTargetPfx = pfx;
+  document.getElementById('scanInput').value = '';
+  document.getElementById('scanInput').click();
+}
+
+function closeScanModal() {
+  document.getElementById('scanModal').style.display = 'none';
+  scanResultData = null;
+}
+
+async function handleScanImage(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  // Show modal in loading state
+  const modal = document.getElementById('scanModal');
+  modal.style.display = 'flex';
+  document.getElementById('scanIcon').textContent = '🔍';
+  document.getElementById('scanTitle').textContent = 'Scanning Card...';
+  document.getElementById('scanSub').textContent = 'Claude is reading your card. This takes a few seconds.';
+  document.getElementById('scanResult').style.display = 'none';
+  document.getElementById('scanBtns').style.display = 'none';
+  document.getElementById('scanSpinner').style.display = 'block';
+
+  // Show preview image
+  const preview = document.getElementById('scanPreview');
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = 'block';
+
+  // Compress image before sending — resize to max 1000px, 80% quality
+  const base64 = await new Promise((res) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = function() {
+      const maxDim = 1000;
+      let w = img.width, h = img.height;
+      if (w > maxDim || h > maxDim) {
+        if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
+        else { w = Math.round(w * maxDim / h); h = maxDim; }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      res(canvas.toDataURL('image/jpeg', 0.8).split(',')[1]);
+    };
+    img.src = url;
+  });
+
+  try {
+    const response = await fetch(SCAN_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        imageBase64: base64,
+        mediaType: 'image/jpeg'
+      })
+    });
+
+    const data = await response.json();
+    if (data.error) throw new Error(data.error);
+    const text = data.result || '';
+    let parsed;
+    try {
+      parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
+    } catch(e) {
+      throw new Error('Could not read card details from image. Try a clearer photo.');
+    }
+
+    scanResultData = parsed;
+    const label = [parsed.year, parsed.player, parsed.set].filter(Boolean).join(' · ');
+    document.getElementById('scanResultText').textContent = label;
+    document.getElementById('scanIcon').textContent = '✅';
+    document.getElementById('scanTitle').textContent = 'Card Identified!';
+    document.getElementById('scanSub').textContent = 'Tap "Search This Card" to find it in your collection.';
+    document.getElementById('scanResult').style.display = 'block';
+    document.getElementById('scanBtns').style.display = 'flex';
+    document.getElementById('scanSpinner').style.display = 'none';
+
+  } catch(err) {
+    document.getElementById('scanIcon').textContent = '⚠️';
+    document.getElementById('scanTitle').textContent = 'Scan Failed';
+    document.getElementById('scanSub').textContent = err.message || 'Could not identify the card. Try a clearer photo.';
+    document.getElementById('scanSpinner').style.display = 'none';
+    document.getElementById('scanBtns').innerHTML = '<button class="scan-modal-btn scan-modal-btn-secondary" onclick="closeScanModal()">Close</button>';
+    document.getElementById('scanBtns').style.display = 'flex';
+  }
+}
+
+function applyScanResult() {
+  if (!scanResultData) return;
+  const playerName = scanResultData.player || '';
+  const setName = scanResultData.set || '';
+  const certNum = (scanResultData.cert || '').replace(/\D/g, '').trim();
+  const playerTerm = playerName.toLowerCase().trim();
+  const setTerm = setName.toLowerCase().trim();
+
+  // Close modal
+  document.getElementById('scanModal').style.display = 'none';
+  scanResultData = null;
+
+  const cards = allCards();
+
+  // 1st priority: match by PSA cert number (exact card)
+  const certMatch = certNum ? cards.find(c => {
+    const slab = (c.slab || '').replace(/\D/g, '');
+    return slab && slab === certNum;
+  }) : null;
+
+  // 2nd priority: player + set match
+  const setMatch = !certMatch ? cards.find(c => {
+    const name = c.pl.toLowerCase();
+    const set = c.st.toLowerCase();
+    const playerOk = name.includes(playerTerm) || playerTerm.includes(name.split(' ').pop());
+    const setOk = setTerm && (set.includes(setTerm.split(' ')[0]) || setTerm.includes(set.split(' ')[0]));
+    return playerOk && setOk;
+  }) : null;
+
+  // 3rd priority: player name only
+  const playerMatch = (!certMatch && !setMatch) ? cards.find(c => {
+    const name = c.pl.toLowerCase();
+    return name.includes(playerTerm) || playerTerm.includes(name.split(' ').pop());
+  }) : null;
+
+  const match = certMatch || setMatch || playerMatch;
+
+  if (!match) {
+    const searchEl = document.getElementById('a-globalSearch');
+    if (searchEl) { searchEl.value = playerName; renderGlobalSearch('a'); searchEl.focus(); }
+    return;
+  }
+
+  // Set state
+  curTab = 'allcards';
+  state['a'].sport = match.cat;
+  state['a'].player = match.pl;
+
+  // Update tabs
+  document.getElementById('tabAllCards').classList.add('active');
+  document.getElementById('tabCollection').classList.remove('active');
+  document.getElementById('tabForSale').classList.remove('active');
+  document.getElementById('tabSold').classList.remove('active');
+
+  // Update breadcrumbs
+  document.getElementById('a-bcSport').textContent = match.cat;
+  document.getElementById('a-bcSport2').textContent = match.cat;
+  document.getElementById('a-bcPlayer').textContent = match.pl;
+
+  // Switch view and render
+  document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+  document.getElementById('a-vCards').classList.add('active');
+  renderCards('a');
+
+  // Scroll to and highlight the matched tile
+  setTimeout(function() {
+    const cardGrid = document.getElementById('a-cardGrid');
+    if (!cardGrid) { window.scrollTo(0,0); return; }
+    const tiles = cardGrid.querySelectorAll('.c');
+
+    let targetTile = null;
+
+    if (certNum) {
+      // Match by cert number using data-slab attribute
+      tiles.forEach(function(tile) {
+        const slab = (tile.getAttribute('data-slab') || '').replace(/[^0-9]/g, '');
+        if (slab && slab === certNum) targetTile = tile;
+      });
+    }
+
+    // Fallback: find by set name words in data-set attribute
+    if (!targetTile && setTerm) {
+      const setWords = setTerm.split(' ').filter(function(w) { return w.length > 3; });
+      let bestScore = -1;
+      tiles.forEach(function(tile) {
+        const tileSet = (tile.getAttribute('data-set') || '').toLowerCase();
+        const score = setWords.filter(function(w) { return tileSet.includes(w); }).length;
+        if (score > bestScore) { bestScore = score; targetTile = tile; }
+      });
+    }
+
+    // Final fallback: first tile
+    if (!targetTile) targetTile = tiles[0];
+
+    if (targetTile) {
+      targetTile.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      targetTile.style.outline = '4px solid #F0B429';
+      targetTile.style.boxShadow = '0 0 24px rgba(240,180,41,0.6)';
+      setTimeout(function() {
+        targetTile.style.outline = '';
+        targetTile.style.boxShadow = '';
+      }, 5000);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, 300);
+}
+
+// ══════════════════════════════════════════════
+//  DEAL BUILDER
+// ══════════════════════════════════════════════
+let dealModeActive = false;
+let dealSelected = new Set();
+let activePctBtn = null;
+let dealBasis = 'show'; // 'show' or 'market'
+
+function setDealBasis(basis) {
+  dealBasis = basis;
+  const showBtn = $('dbtShow');
+  const mktBtn = $('dbtMarket');
+  if (showBtn) showBtn.classList.toggle('active', basis === 'show');
+  if (mktBtn) mktBtn.classList.toggle('active', basis === 'market');
+  setActivePctBtn(null);
+  $('dealCustomInput').value = '';
+  $('dealCustomResult').style.display = 'none';
+  updateDealBar();
+}
+
+function getDealCardKey(tile) {
+  const slab = tile.getAttribute('data-slab');
+  const set = tile.getAttribute('data-set');
+  const yr = tile.getAttribute('data-yr');
+  return slab && slab.trim() ? slab.trim() : `${yr}|${set}`;
+}
+
+function toggleDealMode() {
+  dealModeActive = !dealModeActive;
+  const fab = $('dealFab');
+  const bar = $('dealBar');
+  const banner = $('dealBanner');
+  if (dealModeActive) {
+    fab.classList.add('active');
+    fab.innerHTML = '🤝 Deal Builder <span class="deal-fab-count" id="dealFabCount" style="display:none">0</span>';
+    bar.classList.add('open');
+    bar.classList.remove('collapsed');
+    document.body.classList.add('deal-open');
+    document.body.classList.remove('deal-collapsed');
+    const colBtn = $('dealCollapseBtn');
+    if (colBtn) colBtn.textContent = '▼ Hide';
+    banner.classList.add('show');
+    document.querySelectorAll('.card-grid').forEach(g => g.classList.add('deal-mode'));
+    document.querySelectorAll('.c').forEach(tile => injectDealCheck(tile));
+    updateDealBar();
+  } else {
+    if (dealSelected.size > 0) {
+      if (!confirm(`You have ${dealSelected.size} card${dealSelected.size !== 1 ? 's' : ''} in your deal. Exit and clear them?`)) return;
+    }
+    dealModeActive = false;
+    fab.classList.remove('active');
+    fab.innerHTML = '🤝 Deal Builder <span class="deal-fab-count" id="dealFabCount" style="display:none">0</span>';
+    bar.classList.remove('open');
+    bar.classList.remove('collapsed');
+    banner.classList.remove('show');
+    document.body.classList.remove('deal-open');
+    document.body.classList.remove('deal-collapsed');
+    document.querySelectorAll('.card-grid').forEach(g => g.classList.remove('deal-mode'));
+    clearDealSelection();
+  }
+}
+
+function toggleDealCollapse() {
+  const bar = $('dealBar');
+  const btn = $('dealCollapseBtn');
+  const isCollapsed = bar.classList.toggle('collapsed');
+  document.body.classList.toggle('deal-collapsed', isCollapsed);
+  if (btn) btn.textContent = isCollapsed ? '▲ Show' : '▼ Hide';
+}
+
+function injectDealCheck(tile) {
+  if (!tile.querySelector('.deal-check')) {
+    const chk = document.createElement('div');
+    chk.className = 'deal-check';
+    chk.textContent = '✓';
+    tile.appendChild(chk);
+  }
+}
+
+function toggleCardSelect(tile) {
+  const key = getDealCardKey(tile);
+  const wasEmpty = dealSelected.size === 0;
+  if (dealSelected.has(key)) {
+    dealSelected.delete(key);
+    tile.classList.remove('deal-selected');
+  } else {
+    dealSelected.add(key);
+    tile.classList.add('deal-selected');
+    // auto-expand on first card
+    if (wasEmpty) {
+      const bar = $('dealBar');
+      const btn = $('dealCollapseBtn');
+      bar.classList.remove('collapsed');
+      document.body.classList.remove('deal-collapsed');
+      if (btn) btn.textContent = '▼ Hide';
+    }  }
+  // show/hide Clear button in header
+  const clearBtn = $('dealClearBtn');
+  if (clearBtn) clearBtn.style.display = dealSelected.size > 0 ? 'block' : 'none';
+  setActivePctBtn(null);
+  $('dealCustomInput').value = '';
+  $('dealCustomResult').style.display = 'none';
+  updateDealBar();
+}
+
+function removeCardFromDeal(key) {
+  dealSelected.delete(key);
+  document.querySelectorAll('.c').forEach(tile => {
+    if (getDealCardKey(tile) === key) tile.classList.remove('deal-selected');
+  });
+  const clearBtn = $('dealClearBtn');
+  if (clearBtn) clearBtn.style.display = dealSelected.size > 0 ? 'block' : 'none';
+  setActivePctBtn(null);
+  $('dealCustomInput').value = '';
+  $('dealCustomResult').style.display = 'none';
+  updateDealBar();
+}
+
+function clearDealSelection() {
+  dealSelected.clear();
+  document.querySelectorAll('.c.deal-selected').forEach(t => t.classList.remove('deal-selected'));
+  const clearBtn = $('dealClearBtn');
+  if (clearBtn) clearBtn.style.display = 'none';
+  setActivePctBtn(null);
+  $('dealCustomInput').value = '';
+  $('dealCustomResult').style.display = 'none';
+  updateDealBar();
+}
+
+function setActivePctBtn(pct) {
+  [60,70,80,90,100].forEach(p => {
+    const btn = $(`dealBtn${p}`);
+    if (btn) btn.classList.remove('deal-pct-active');
+  });
+  activePctBtn = pct;
+  if (pct) {
+    const btn = $(`dealBtn${pct}`);
+    if (btn) btn.classList.add('deal-pct-active');
+  }
+}
+
+function getSelectedCardData() {
+  const cards = allCards();
+  const selected = [];
+  dealSelected.forEach(key => {
+    let card = cards.find(c => c.slab && c.slab.trim() === key);
+    if (!card) {
+      const parts = key.split('|');
+      const yr = parts[0], set = parts.slice(1).join('|');
+      card = cards.find(c => c.yr === yr && c.st === set);
+    }
+    if (card) selected.push({...card, _dealKey: key});
+  });
+  return selected;
+}
+
+function updateDealBar() {
+  const selected = getSelectedCardData();
+  const count = dealSelected.size;
+  const totalVal = selected.reduce((s, c) => s + c.val, 0);
+  const totalFloor = selected.reduce((s, c) => s + (c.floorPrice > 0 ? c.floorPrice : c.cost), 0);
+  const totalShow = selected.reduce((s, c) => s + (c.showPrice > 0 ? c.showPrice : c.val), 0);
+
+  $('dealCount').textContent = count;
+  $('dealValue').textContent = count > 0 ? fm(totalVal) : '$0.00';
+  $('dealFloor').textContent = count > 0 ? fm(totalFloor) : '$0.00';
+  // update mini totals strip (visible on mobile compact view)
+  const miniCount = $('dealMiniCount');
+  const miniFloor = $('dealMiniFloor');
+  if (miniCount) miniCount.textContent = count;
+  if (miniFloor) miniFloor.textContent = count > 0 ? fm(totalFloor) : '—';
+  const showPriceEl = $('dealShowPrice');
+  if (showPriceEl) showPriceEl.textContent = count > 0 ? fm(totalShow) : '$0.00';
+
+  // show/hide Show Customer button
+  const showFullBtn = $('dealShowFullBtn');
+  if (showFullBtn) showFullBtn.classList.toggle('visible', count > 0);
+
+  // fab count badge
+  const fabCount = $('dealFabCount');
+  if (fabCount) { fabCount.textContent = count; fabCount.style.display = count > 0 ? 'inline-block' : 'none'; }
+
+  // selected cards chips — show player, set, condition, value
+  const listEl = $('dealCardsList');
+  const scrollEl = $('dealCardsScroll');
+  if (listEl && scrollEl) {
+    if (count > 0) {
+      listEl.classList.add('has-cards');
+      scrollEl.innerHTML = selected.map(c => {
+        const setStr = [c.yr, c.st].filter(Boolean).join(' ') + (c.num ? ' #'+c.num : '');
+        const safeKey = c._dealKey.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        return `<div class="deal-card-chip" onclick="removeCardFromDeal('${safeKey}')">
+          <div class="deal-card-chip-info">
+            <span class="deal-card-chip-name">${c.pl}${c.con ? ' · '+c.con : ''}</span>
+            <span class="deal-card-chip-set">${setStr}</span>
+            <span class="deal-card-chip-val">${fm(c.val)}</span>
+          </div>
+          <span class="deal-card-chip-x">×</span>
+        </div>`;
+      }).join('');
+    } else {
+      listEl.classList.remove('has-cards');
+      scrollEl.innerHTML = '';
+    }
+  }
+
+  // pct buttons — calculate off show price or market value based on toggle
+  const basisTotal = dealBasis === 'show' ? totalShow : totalVal;
+  [60, 70, 80, 90, 100].forEach(pct => {
+    const amt = basisTotal * pct / 100;
+    const amtEl = $(`dealAmt${pct}`);
+    const btnEl = $(`dealBtn${pct}`);
+    if (amtEl) amtEl.textContent = count > 0 ? fm(amt) : '—';
+    if (btnEl) {
+      const isBelow = count > 0 && totalFloor > 0 && amt < totalFloor;
+      btnEl.classList.toggle('below-floor', isBelow);
+    }
+  });
+
+  evalCustomOffer();
+}
+
+function applyPctOffer(pct) {
+  const selected = getSelectedCardData();
+  if (!selected.length) return;
+  const totalVal = selected.reduce((s, c) => s + c.val, 0);
+  const totalShow = selected.reduce((s, c) => s + (c.showPrice > 0 ? c.showPrice : c.val), 0);
+  const basisTotal = dealBasis === 'show' ? totalShow : totalVal;
+  const offer = basisTotal * pct / 100;
+  $('dealCustomInput').value = offer.toFixed(2);
+  setActivePctBtn(pct);
+  evalCustomOffer();
+}
+
+function evalCustomOffer() {
+  const input = parseFloat($('dealCustomInput').value) || 0;
+  const resultEl = $('dealCustomResult');
+  const selected = getSelectedCardData();
+  if (!selected.length || input <= 0) { resultEl.style.display = 'none'; return; }
+  const totalFloor = selected.reduce((s, c) => s + (c.floorPrice > 0 ? c.floorPrice : c.cost), 0);
+  const totalVal = selected.reduce((s, c) => s + c.val, 0);
+  const totalShow = selected.reduce((s, c) => s + (c.showPrice > 0 ? c.showPrice : c.val), 0);
+  const basisTotal = dealBasis === 'show' ? totalShow : totalVal;
+  const basisLabel = dealBasis === 'show' ? 'show price' : 'market value';
+  const pct = basisTotal > 0 ? ((input / basisTotal) * 100).toFixed(1) : 0;
+  const aboveFloor = input - totalFloor;
+  const nearFloorThreshold = totalFloor * 0.05;
+  resultEl.style.display = 'block';
+  if (input >= totalFloor) {
+    if (aboveFloor <= nearFloorThreshold) {
+      resultEl.className = 'deal-custom-result warn';
+      resultEl.innerHTML = `⚠ &nbsp;Close to floor &mdash; ${pct}% of ${basisLabel} &nbsp;·&nbsp; only ${fm(aboveFloor)} above your minimum`;
+    } else {
+      resultEl.className = 'deal-custom-result ok';
+      resultEl.innerHTML = `✓ &nbsp;Good deal &mdash; ${pct}% of ${basisLabel} &nbsp;·&nbsp; ${fm(aboveFloor)} above your floor`;
+    }
+  } else {
+    resultEl.className = 'deal-custom-result no';
+    resultEl.innerHTML = `✗ &nbsp;Too low &mdash; ${pct}% of ${basisLabel} &nbsp;·&nbsp; ${fm(totalFloor - input)} below your floor`;
+  }
+  const warnEl = $('dealFloorWarn');
+  if (warnEl) warnEl.classList.toggle('show', input > 0 && totalFloor > 0 && input < totalFloor);
+}
+
+function openDealPresent() {
+  const selected = getSelectedCardData();
+  if (!selected.length) return;
+  const offerRaw = parseFloat($('dealCustomInput').value) || 0;
+  const totalShow = selected.reduce((s, c) => s + (c.showPrice > 0 ? c.showPrice : c.val), 0);
+  const displayPrice = offerRaw > 0 ? offerRaw : totalShow;
+
+  // Cards list — clean, no internal pricing shown to customer
+  $('dpCardsList').innerHTML = selected.map(c => {
+    const setStr = [c.yr, c.st].filter(Boolean).join(' ') + (c.num ? ' #'+c.num : '');
+    const cardShow = c.showPrice > 0 ? c.showPrice : c.val;
+    const proportion = totalShow > 0 ? cardShow / totalShow : 1 / selected.length;
+    const cardPrice = offerRaw > 0 ? offerRaw * proportion : cardShow;
+    return `<div class="dp-card-row">
+      <div class="dp-card-left">
+        <div class="dp-card-name">${c.pl}</div>
+        <div class="dp-card-set">${setStr}</div>
+        <div class="dp-card-price">${fm(cardPrice)}</div>
+      </div>
+      <div class="dp-card-right">
+        <span class="dp-card-cond ${condCls(c.con)}">${c.con || 'RAW'}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Offer — price + savings shown to customer, no floor info
+  $('dpOfferVal').textContent = fm(displayPrice);
+  const editInput = $('dpOfferEditInput');
+  if (editInput) editInput.value = displayPrice > 0 ? displayPrice.toFixed(2) : '';
+
+  // Show savings vs market value (customer-friendly, no internal floor data)
+  const totalVal = selected.reduce((s, c) => s + c.val, 0);
+  const savings = totalVal - displayPrice;
+  const pct = totalVal > 0 ? ((displayPrice / totalVal) * 100).toFixed(1) : 0;
+  updateSavingsBadge(displayPrice, totalVal);
+
+  // reset confirm state
+  $('dpOfferBox').style.display = 'block';
+  $('dpSoldConfirm').style.display = 'none';
+  $('dpMarkSoldBtn').style.display = 'block';
+
+  $('dealPresent').classList.add('open');
+}
+
+function updatePresentOffer() {
+  const input = parseFloat($('dpOfferEditInput').value) || 0;
+  $('dpOfferVal').textContent = input > 0 ? fm(input) : '—';
+  $('dealCustomInput').value = input > 0 ? input.toFixed(2) : '';
+  const selected = getSelectedCardData();
+  const totalVal = selected.reduce((s, c) => s + c.val, 0);
+  const totalShow = selected.reduce((s, c) => s + (c.showPrice > 0 ? c.showPrice : c.val), 0);
+  updateSavingsBadge(input, totalVal);
+  // Update per-card prices live
+  if (input > 0) {
+    selected.forEach(c => {
+      const cardShow = c.showPrice > 0 ? c.showPrice : c.val;
+      const proportion = totalShow > 0 ? cardShow / totalShow : 1 / selected.length;
+      const cardPrice = input * proportion;
+      const rows = document.querySelectorAll('#dpCardsList .dp-card-price');
+      const idx = selected.indexOf(c);
+      if (rows[idx]) rows[idx].textContent = fm(cardPrice);
+    });
+  }
+}
+
+function updateSavingsBadge(price, totalVal) {
+  const badge = $('dpOfferSavings');
+  const pctEl = $('dpOfferPct');
+  const txtEl = $('dpOfferSavingsTxt');
+  if (!badge) return;
+  if (price <= 0 || totalVal <= 0) { badge.style.display = 'none'; return; }
+
+  // Use show price as the basis — that's what you're trying to get
+  const selected = getSelectedCardData();
+  const totalShow = selected.length > 0
+    ? selected.reduce((s, c) => s + (c.showPrice > 0 ? c.showPrice : c.val), 0)
+    : totalVal;
+  const basis = totalShow > 0 ? totalShow : totalVal;
+  const pct = ((price / basis) * 100).toFixed(1);
+  const pctNum = parseFloat(pct);
+
+  badge.style.display = 'inline-flex';
+  if (pctEl) pctEl.textContent = pct + '% of show price';
+  if (txtEl) txtEl.textContent = price < basis ? '· ' + fm(basis - price) + ' off ask' : '· at or above ask';
+
+  let badgeColor, textColor, borderColor;
+  if (pctNum < 70) {
+    badgeColor = 'rgba(244,63,94,0.2)'; textColor = '#F43F5E'; borderColor = 'rgba(244,63,94,0.4)';
+  } else if (pctNum < 85) {
+    badgeColor = 'rgba(240,180,41,0.2)'; textColor = '#F0B429'; borderColor = 'rgba(240,180,41,0.4)';
+  } else {
+    badgeColor = 'rgba(34,197,94,0.15)'; textColor = '#4ADE80'; borderColor = 'rgba(34,197,94,0.3)';
+  }
+  badge.style.background = badgeColor;
+  badge.style.borderColor = borderColor;
+  if (pctEl) pctEl.style.color = textColor;
+  if (txtEl) txtEl.style.color = textColor;
+}
+
+function closeDealPresent() {
+  $('dealPresent').classList.remove('open');
+}
+
+// patch card grids for deal mode
+function patchCardGridsForDeal() {
+  document.querySelectorAll('.c').forEach(tile => {
+    if (tile.dataset.dealPatched) return;
+    tile.dataset.dealPatched = '1';
+    if (!tile.querySelector('.deal-check')) {
+      const chk = document.createElement('div');
+      chk.className = 'deal-check';
+      chk.textContent = '✓';
+      tile.appendChild(chk);
+    }
+    const key = getDealCardKey(tile);
+    if (dealSelected.has(key)) tile.classList.add('deal-selected');
+    const origClick = tile.onclick;
+    tile.onclick = function(e) {
+      if (dealModeActive) { e.stopPropagation(); toggleCardSelect(tile); }
+      else if (origClick) origClick.call(tile, e);
+    };
+  });
+}
+
+const dealObserver = new MutationObserver(() => { patchCardGridsForDeal(); });
+setTimeout(() => {
+  document.querySelectorAll('.card-grid').forEach(g => dealObserver.observe(g, { childList: true }));
+}, 500);
+
+// ══════════════════════════════════════════════
+//  SHOW SALES — local deal tracking
+// ══════════════════════════════════════════════
+const SHOW_SALES_KEY = 'cardPortfolioShowSales';
+
+function getShowSales() {
+  try { return JSON.parse(localStorage.getItem(SHOW_SALES_KEY) || '[]'); }
+  catch(e) { return []; }
+}
+
+function saveShowSales(sales) {
+  try { localStorage.setItem(SHOW_SALES_KEY, JSON.stringify(sales)); } catch(e) {}
+}
+
+function markDealAsSold() {
+  const selected = getSelectedCardData();
+  if (!selected.length) return;
+  const offerRaw = parseFloat($('dealCustomInput').value) || 0;
+  const totalShow = selected.reduce((s,c) => s + (c.showPrice > 0 ? c.showPrice : c.val), 0);
+  const dealTotal = offerRaw > 0 ? offerRaw : totalShow;
+
+  // Proportional split by show price
+  const cards = selected.map(c => {
+    const cardShow = c.showPrice > 0 ? c.showPrice : c.val;
+    const proportion = totalShow > 0 ? cardShow / totalShow : 1 / selected.length;
+    return {
+      pl: c.pl, yr: c.yr, st: c.st, num: c.num, con: c.con, cat: c.cat, slab: c.slab||'',
+      cost: c.cost, salePrice: Math.round(dealTotal * proportion * 100) / 100
+    };
+  });
+
+  const sale = {
+    id: Date.now(),
+    time: new Date().toLocaleString([], {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}),
+    total: dealTotal,
+    cards
+  };
+
+  const sales = getShowSales();
+  sales.unshift(sale);
+  saveShowSales(sales);
+
+  // Show confirmation
+  $('dpOfferBox').style.display = 'none';
+  $('dpMarkSoldBtn').style.display = 'none';
+  $('dpSoldConfirm').style.display = 'block';
+  $('dpSoldConfirmSub').textContent = `${cards.length} card${cards.length !== 1 ? 's' : ''} sold for ${fm(dealTotal)} — recorded in your Sold tab.`;
+
+  // Refresh card grids so SOLD AT SHOW badges appear
+  ['s','c','a'].forEach(pfx => { const g = $(`${pfx}-cardGrid`); if (g && g.innerHTML) renderCards(pfx); });
+
+  // Update sold tab badge + show sales
+  renderShowSales();
+  updateSoldBadge();
+}
+
+function updateSoldBadge() {
+  const sales = getShowSales();
+  const badge = $('soldBadge');
+  if (!badge) return;
+  if (sales.length > 0) {
+    badge.textContent = sales.length;
+    badge.style.display = 'inline-block';
+    badge.style.background = '#22C55E';
+    badge.style.color = '#000';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function renderShowSales() {
+  const sales = getShowSales();
+  const section = $('showSalesSection');
+  const grid = $('showSalesGrid');
+  const badge = $('showSalesBadge');
+  if (!section || !grid) return;
+
+  updateSoldBadge();
+
+  if (!sales.length) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  if (badge) badge.textContent = sales.length + ' deal' + (sales.length !== 1 ? 's' : '');
+
+  // Running daily total
+  const today = new Date().toLocaleDateString();
+  const todayTotal = sales
+    .filter(s => new Date(s.id).toLocaleDateString() === today)
+    .reduce((sum, s) => sum + s.total, 0);
+  const allTotal = sales.reduce((sum, s) => sum + s.total, 0);
+
+  grid.innerHTML = `
+    <div class="show-day-totals">
+      <div class="show-day-box">
+        <div class="show-day-label">Today's Sales</div>
+        <div class="show-day-val green">${fm(todayTotal)}</div>
+        <div class="show-day-sub">${sales.filter(s => new Date(s.id).toLocaleDateString() === today).length} deal${sales.filter(s => new Date(s.id).toLocaleDateString() === today).length !== 1 ? 's' : ''} today</div>
+      </div>
+      <div class="show-day-box">
+        <div class="show-day-label">All Time (This Device)</div>
+        <div class="show-day-val">${fm(allTotal)}</div>
+        <div class="show-day-sub">${sales.length} deal${sales.length !== 1 ? 's' : ''} total</div>
+      </div>
+    </div>
+    ${sales.map(sale => `
+    <div class="show-sale-card">
+      <button class="show-sale-delete" onclick="deleteShowSale(${sale.id})" title="Remove">✕</button>
+      <div class="show-sale-time">${sale.time}</div>
+      <div class="show-sale-total">${fm(sale.total)}</div>
+      <div class="show-sale-cards">
+        ${sale.cards.map(c => `
+          <div class="show-sale-row">
+            <div class="show-sale-row-left">
+              <div class="show-sale-row-name">${c.pl}${c.con ? ' · ' + c.con : ''}</div>
+              <div class="show-sale-row-meta">${[c.yr, c.st].filter(Boolean).join(' ')}${c.num ? ' #' + c.num : ''}</div>
+            </div>
+            <div class="show-sale-row-price">${fm(c.salePrice)}</div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('')}`;
+  refreshCashGoalUI();
+}
+
+function emailDaySummary() {
+  const sales = getShowSales();
+  if (!sales.length) return;
+  const today = new Date().toLocaleDateString([], {month:'long', day:'numeric', year:'numeric'});
+  const todaySales = sales.filter(s => new Date(s.id).toLocaleDateString() === new Date().toLocaleDateString());
+  const allTotal = sales.reduce((s, x) => s + x.total, 0);
+  const todayTotal = todaySales.reduce((s, x) => s + x.total, 0);
+
+  let body = `Card Show Sales Summary — ${today}\n\n`;
+  body += `TODAY'S TOTAL: ${fm(todayTotal)} (${todaySales.length} deal${todaySales.length !== 1 ? 's' : ''})\n`;
+  body += `ALL TIME (THIS DEVICE): ${fm(allTotal)} (${sales.length} deals)\n\n`;
+  body += `--- DEAL BREAKDOWN ---\n\n`;
+
+  sales.forEach((sale, i) => {
+    body += `Deal ${i + 1} — ${sale.time} — ${fm(sale.total)}\n`;
+    sale.cards.forEach(c => {
+      const setStr = [c.yr, c.st].filter(Boolean).join(' ') + (c.num ? ' #' + c.num : '');
+      body += `  • ${c.pl}${c.con ? ' · ' + c.con : ''} — ${setStr} — ${fm(c.salePrice)}\n`;
+    });
+    body += '\n';
+  });
+
+  const subject = encodeURIComponent(`Card Show Sales — ${today}`);
+  const bodyEncoded = encodeURIComponent(body);
+  window.location.href = `mailto:?subject=${subject}&body=${bodyEncoded}`;
+}
+
+function deleteShowSale(id) {
+  const sales = getShowSales().filter(s => s.id !== id);
+  saveShowSales(sales);
+  renderShowSales();
+}
+
+function clearShowSales() {
+  if (!confirm('Clear all show sales records?')) return;
+  saveShowSales([]);
+  saveCashGoalData({});
+  if ($('cashGoalInput')) $('cashGoalInput').value = '';
+  renderShowSales();
+  refreshCashGoalUI();
+}
+
+function newShow() {
+  const sales = getShowSales();
+  if (!sales.length) { alert('No sales to archive — you\'re already starting fresh.'); return; }
+  const total = fm(sales.reduce((s, x) => s + x.total, 0));
+  if (!confirm(`Archive ${sales.length} deal${sales.length !== 1 ? 's' : ''} (${total}) from this show and start fresh?`)) return;
+  // Archive to a separate key with timestamp
+  const archiveKey = 'cardPortfolioShowArchive';
+  try {
+    const existing = JSON.parse(localStorage.getItem(archiveKey) || '[]');
+    existing.push({ date: new Date().toLocaleDateString([], {month:'short', day:'numeric', year:'numeric'}), sales, total: sales.reduce((s, x) => s + x.total, 0) });
+    localStorage.setItem(archiveKey, JSON.stringify(existing));
+  } catch(e) {}
+  saveShowSales([]);
+  saveCashGoalData({});
+  if ($('cashGoalInput')) $('cashGoalInput').value = '';
+  renderShowSales();
+  refreshCashGoalUI();
+}
+
+// Nav search — works from any tab, searches all cards
+function renderNavSearch() {
+  const q = $('navSearch').value.toLowerCase().trim();
+  const resultsEl = $('navSearchResults');
+  if (!q || q.length < 2) { resultsEl.classList.remove('open'); return; }
+  const cards = allCards();
+  const matches = cards.filter(c =>
+    c.pl.toLowerCase().includes(q) ||
+    c.st.toLowerCase().includes(q) ||
+    c.yr.includes(q)
+  ).slice(0, 8);
+  resultsEl.classList.add('open');
+  if (!matches.length) {
+    resultsEl.innerHTML = '<div class="nav-sr-empty">No cards found</div>';
+    return;
+  }
+  resultsEl.innerHTML = matches.map(c => {
+    const setStr = [c.yr, c.st].filter(Boolean).join(' ') + (c.num ? ' #'+c.num : '');
+    const src = c._src === 'forsale' ? 'FOR SALE' : 'COLLECTION';
+    const srcCls = c._src === 'forsale' ? 'sale' : 'coll';
+    const price = c._src === 'forsale' && c.showPrice > 0 ? fm(c.showPrice) : fm(c.val);
+    return `<div class="nav-sr-item" onclick="navSearchDrill('${c._src}','${c.cat}','${c.pl.replace(/'/g,"\\'")}')">
+      <div class="nav-sr-left">
+        <div class="nav-sr-name">${c.pl}</div>
+        <div class="nav-sr-set">${setStr}</div>
+      </div>
+      <div class="nav-sr-right">
+        <div class="nav-sr-val">${price}</div>
+        <span class="nav-sr-src ${srcCls}">${src}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function navSearchDrill(src, sport, player) {
+  $('navSearch').value = '';
+  $('navSearchResults').classList.remove('open');
+  const pfx = src === 'forsale' ? 's' : 'c';
+  switchTab(src === 'forsale' ? 'forsale' : 'collection');
+  state[pfx].sport = sport;
+  state[pfx].player = player;
+  $(`${pfx}-bcSport`).textContent = sport;
+  $(`${pfx}-bcSport2`).textContent = sport;
+  $(`${pfx}-bcPlayer`).textContent = player;
+  showView(`${pfx}-vCards`);
+  renderCards(pfx);
+  window.scrollTo(0, 0);
+}
+
+// Back to top
+window.addEventListener('scroll', function(){
+  const btn = $('backTopBtn');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+}, {passive:true});
+
+// ══════════════════════════════════════════════
+//  CASH GOAL TRACKER
+// ══════════════════════════════════════════════
+const CASH_GOAL_KEY = 'cardPortfolioCashGoal';
+
+function getCashGoalData() {
+  try { return JSON.parse(localStorage.getItem(CASH_GOAL_KEY) || '{}'); } catch(e) { return {}; }
+}
+function saveCashGoalData(d) {
+  try { localStorage.setItem(CASH_GOAL_KEY, JSON.stringify(d)); } catch(e) {}
+}
+
+function updateCashGoal() {
+  const goal = parseFloat($('cashGoalInput').value) || 0;
+  const d = getCashGoalData();
+  d.goal = goal;
+  saveCashGoalData(d);
+  refreshCashGoalUI();
+}
+
+function clearCashGoal() {
+  saveCashGoalData({});
+  $('cashGoalInput').value = '';
+  refreshCashGoalUI();
+}
+
+function refreshCashGoalUI() {
+  const d = getCashGoalData();
+  const goal = d.goal || 0;
+  const sales = getShowSales();
+  const earned = sales.reduce((s, x) => s + x.total, 0);
+  const progressEl = $('cashGoalProgress');
+  const statsEl = $('cashGoalStats');
+  const clearBtn = $('cashGoalClearBtn');
+  const fillEl = $('cashGoalFill');
+  if (!progressEl || !statsEl) return;
+  if (goal > 0) {
+    progressEl.style.display = 'block';
+    statsEl.style.display = 'block';
+    if (clearBtn) clearBtn.style.display = 'inline';
+    const pct = Math.min((earned / goal) * 100, 100);
+    if (fillEl) { fillEl.style.width = pct + '%'; fillEl.classList.toggle('done', earned >= goal); }
+    const remaining = goal - earned;
+    if (earned >= goal) {
+      statsEl.innerHTML = `<b class="done">${fm(earned)} — Goal reached! 🎉</b>`;
+    } else {
+      statsEl.innerHTML = `<b>${fm(earned)}</b> / ${fm(goal)} &nbsp;·&nbsp; ${fm(remaining)} to go`;
+    }
+  } else {
+    progressEl.style.display = 'none';
+    statsEl.style.display = 'none';
+    if (clearBtn) clearBtn.style.display = 'none';
+  }
+  // restore input value
+  if (goal > 0 && $('cashGoalInput').value === '') $('cashGoalInput').value = goal;
+}
+
+
+
+// ══════════════════════════════════════════════
+//  SHOW MODE — compact list for quick scanning
+// Default ON for For Sale tab (that's the tab used at shows).
+// ══════════════════════════════════════════════
+let showModeActive = (() => {
+  try {
+    const saved = localStorage.getItem('showModeActive');
+    // Default to TRUE (list view) if never set — that's the show-table-friendly mode
+    return saved === null ? true : saved === 'true';
+  } catch (e) { return true; }
+})();
+
+function applyShowMode() {
+  const grid = $('s-cardGrid');
+  const btn = $('showModeBtn');
+  if (grid) grid.classList.toggle('show-mode', showModeActive);
+  if (btn) {
+    btn.classList.toggle('active', showModeActive);
+    // Button clearly shows whether Show View is ON or OFF
+    btn.innerHTML = showModeActive
+      ? '🎪 Show View: ON'
+      : '🎪 Show View';
+  }
+}
+
+function toggleShowMode() {
+  showModeActive = !showModeActive;
+  try { localStorage.setItem('showModeActive', showModeActive); } catch (e) {}
+  applyShowMode();
+}
+
+// Apply on load once DOM is ready
+document.addEventListener('DOMContentLoaded', applyShowMode);
+
+// ══════════════════════════════════════════════
+//  SHAKE TO CLEAR DEAL (mobile)
+// ══════════════════════════════════════════════
+(function() {
+  let lastX = null, lastY = null, lastZ = null, lastShake = 0;
+  if (!window.DeviceMotionEvent) return;
+  window.addEventListener('devicemotion', function(e) {
+    const a = e.accelerationIncludingGravity;
+    if (!a) return;
+    const now = Date.now();
+    if (lastX === null) { lastX = a.x; lastY = a.y; lastZ = a.z; return; }
+    const dx = Math.abs(a.x - lastX), dy = Math.abs(a.y - lastY), dz = Math.abs(a.z - lastZ);
+    lastX = a.x; lastY = a.y; lastZ = a.z;
+    if ((dx + dy + dz) > 40 && now - lastShake > 2000) {
+      lastShake = now;
+      if (dealModeActive && dealSelected.size > 0) {
+        if (confirm('Shake detected — clear deal selection?')) clearDealSelection();
+      }
+    }
+  });
+})();
+
+// ══════════════════════════════════════════════
+//  QUICK ADD SALE
+// ══════════════════════════════════════════════
+function openQuickAdd() {
+  ['qaPlayer','qaPrice','qaYear','qaGrade','qaSet'].forEach(id => { const el = $(id); if (el) el.value = ''; });
+  $('quickAddModal').classList.add('open');
+  setTimeout(() => { const p = $('qaPlayer'); if (p) p.focus(); }, 100);
+}
+
+function closeQuickAdd() {
+  $('quickAddModal').classList.remove('open');
+}
+
+function submitQuickAdd() {
+  const player = ($('qaPlayer').value || '').trim();
+  const price = parseFloat($('qaPrice').value) || 0;
+  if (!player) { $('qaPlayer').focus(); $('qaPlayer').style.borderColor = 'var(--red)'; return; }
+  if (price <= 0) { $('qaPrice').focus(); $('qaPrice').style.borderColor = 'var(--red)'; return; }
+  // Reset border colors
+  ['qaPlayer','qaPrice'].forEach(id => { const el = $(id); if (el) el.style.borderColor = ''; });
+
+  const yr = ($('qaYear').value || '').trim();
+  const con = ($('qaGrade').value || '').trim();
+  const st = ($('qaSet').value || '').trim();
+
+  const sale = {
+    id: Date.now(),
+    time: new Date().toLocaleString([], {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}),
+    total: price,
+    cards: [{ pl: player, yr, st, num: '', con, cat: '', slab: '', cost: 0, salePrice: price }]
+  };
+
+  const sales = getShowSales();
+  sales.unshift(sale);
+  saveShowSales(sales);
+  closeQuickAdd();
+  // Switch to sold tab so they can see it
+  switchTab('sold');
+  renderShowSales();
+  refreshCashGoalUI();
+}
+
+// Close quick add on backdrop click
+document.addEventListener('click', function(e) {
+  const modal = $('quickAddModal');
+  if (modal && e.target === modal) closeQuickAdd();
+});
+
+// ══════════════════════════════════════════════
+//  eBay ASK PRICE CALCULATOR
+// ══════════════════════════════════════════════
+// Defaults: trading card category fees as of 2026
+//   Final value fee: 13.25% of (item + shipping)
+//   Per-order fee: $0.40 for orders over $10
+//   Shipping: $5 PWE/BMWT default (user can change)
+const EBAY_DEFAULTS = { feePct: 13.25, perOrder: 0.40, ship: 5, buffer: 0 };
+let _ebayCurrentCard = null;
+let _ebayScenario = 'market';
+
+function getEbaySettings() {
+  try {
+    const s = JSON.parse(localStorage.getItem('ebaySettings') || '{}');
+    return {
+      feePct: s.feePct != null ? parseFloat(s.feePct) : EBAY_DEFAULTS.feePct,
+      perOrder: s.perOrder != null ? parseFloat(s.perOrder) : EBAY_DEFAULTS.perOrder,
+      ship: s.ship != null ? parseFloat(s.ship) : EBAY_DEFAULTS.ship,
+      buffer: s.buffer != null ? parseFloat(s.buffer) : EBAY_DEFAULTS.buffer,
+    };
+  } catch (e) { return { ...EBAY_DEFAULTS }; }
+}
+
+function saveEbaySettings() {
+  const settings = {
+    feePct: parseFloat($('ebaySetFeePct').value) || 0,
+    perOrder: parseFloat($('ebaySetPerOrder').value) || 0,
+    ship: parseFloat($('ebaySetShip').value) || 0,
+    buffer: parseFloat($('ebaySetBuffer').value) || 0,
+  };
+  try { localStorage.setItem('ebaySettings', JSON.stringify(settings)); } catch (e) {}
+}
+
+function resetEbaySettings() {
+  try { localStorage.removeItem('ebaySettings'); } catch (e) {}
+  loadEbaySettingsUI();
+  recalcEbay();
+  refreshCardAskPrices();
+}
+
+function loadEbaySettingsUI() {
+  const s = getEbaySettings();
+  $('ebaySetFeePct').value = s.feePct;
+  $('ebaySetPerOrder').value = s.perOrder;
+  $('ebaySetShip').value = s.ship;
+  $('ebaySetBuffer').value = s.buffer;
+}
+
+function toggleEbaySettings() {
+  const p = $('ebaySettingsPanel');
+  const btn = $('ebaySettingsToggle');
+  const open = p.classList.toggle('open');
+  btn.textContent = open ? '✕ Close settings' : '⚙ Fee & shipping settings';
+}
+
+/**
+ * Given a desired net takehome amount, return the list price on eBay.
+ * Math: net = gross - (gross * feeRate) - perOrder - ship
+ *   where gross = listPrice + shipping (buyer pays both; eBay fees on both)
+ *   You pay actual shipping. So:
+ *   net = (listPrice + ship) * (1 - feeRate) - perOrder - ship
+ *   solving for listPrice:
+ *   listPrice = (net + perOrder + ship) / (1 - feeRate) - ship
+ * Then add buffer % as margin of safety.
+ */
+function calcEbayAskPrice(targetNet) {
+  const s = getEbaySettings();
+  const feeRate = s.feePct / 100;
+  if (feeRate >= 1) return 0;
+  let list = (parseFloat(targetNet) + s.perOrder + s.ship) / (1 - feeRate) - s.ship;
+  list = list * (1 + s.buffer / 100);
+  return Math.max(0, Math.ceil(list));  // round up for cleaner listing prices
+}
+
+/** Given a list price, calculate actual net takehome */
+function calcEbayNet(listPrice) {
+  const s = getEbaySettings();
+  const gross = parseFloat(listPrice) + s.ship;
+  const fee = gross * (s.feePct / 100);
+  const net = gross - fee - s.perOrder - s.ship;
+  return { gross, fee, perOrder: s.perOrder, ship: s.ship, net };
+}
+
+function openEbayCalc(cardKey) {
+  const key = decodeURIComponent(cardKey);
+  // search both collection and for-sale for matching card
+  const allCards = [...saleCards, ...collCards];
+  const card = allCards.find(c => `${c.pl}|${c.yr}|${c.st}|${c.num}|${c.slab}` === key);
+  if (!card) return;
+  _ebayCurrentCard = card;
+  _ebayScenario = 'market';
+
+  $('ebayCardName').textContent = card.pl;
+  $('ebayCardSet').textContent = [card.yr, card.st, card.num ? '#' + card.num : '', card.con]
+    .filter(Boolean).join(' · ');
+  $('ebayCardVal').textContent = fm(card.val);
+
+  // Update scenario button values
+  $('ebayScnMarketVal').textContent = fm(card.val);
+  $('ebayScnFloorVal').textContent = card.floorPrice > 0 ? fm(card.floorPrice) : '—';
+  if (!(card.floorPrice > 0)) {
+    $('ebayScnFloor').style.opacity = '0.4';
+    $('ebayScnFloor').style.pointerEvents = 'none';
+  } else {
+    $('ebayScnFloor').style.opacity = '';
+    $('ebayScnFloor').style.pointerEvents = '';
+  }
+
+  // Default to net market value
+  $('ebayTargetNet').value = Math.round(card.val);
+  loadEbaySettingsUI();
+  setEbayScenario('market');
+  $('ebayModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEbayCalc() {
+  $('ebayModal').classList.remove('open');
+  document.body.style.overflow = '';
+  _ebayCurrentCard = null;
+  // Make sure settings panel is closed next time
+  $('ebaySettingsPanel').classList.remove('open');
+  $('ebaySettingsToggle').textContent = '⚙ Fee & shipping settings';
+}
+
+function setEbayScenario(which) {
+  _ebayScenario = which;
+  ['ebayScnMarket','ebayScnFloor','ebayScnCustom'].forEach(id => $(id).classList.remove('active'));
+  if (which === 'market' && _ebayCurrentCard) {
+    $('ebayScnMarket').classList.add('active');
+    $('ebayTargetNet').value = Math.round(_ebayCurrentCard.val);
+    $('ebayTargetHint').textContent = 'Net the full market value';
+  } else if (which === 'floor' && _ebayCurrentCard && _ebayCurrentCard.floorPrice > 0) {
+    $('ebayScnFloor').classList.add('active');
+    $('ebayTargetNet').value = Math.round(_ebayCurrentCard.floorPrice);
+    $('ebayTargetHint').textContent = 'Your lowest acceptable net';
+  } else {
+    $('ebayScnCustom').classList.add('active');
+    $('ebayTargetHint').textContent = 'after eBay fees & shipping';
+    $('ebayTargetNet').focus();
+    $('ebayTargetNet').select();
+  }
+  recalcEbay();
+}
+
+function recalcEbay() {
+  if (!_ebayCurrentCard) return;
+  const target = parseFloat($('ebayTargetNet').value) || 0;
+  const ask = calcEbayAskPrice(target);
+  const bd = calcEbayNet(ask);
+  const s = getEbaySettings();
+
+  $('ebayAskResult').textContent = ask > 0 ? fm(ask) : '—';
+  const markup = target > 0 ? ((ask - target) / target * 100) : 0;
+  $('ebayAskSub').textContent = target > 0
+    ? `List at ${fm(ask)} to take home ${fm(target)} (${markup.toFixed(1)}% markup over net)`
+    : 'Enter a target net amount';
+
+  $('ebayBdGross').textContent = fm(bd.gross);
+  $('ebayBdFee').textContent = '−' + fm(bd.fee);
+  $('ebayBdFeePct').textContent = `(${s.feePct}%)`;
+  $('ebayBdPerOrder').textContent = '−' + fm(bd.perOrder);
+  $('ebayBdShip').textContent = '−' + fm(bd.ship);
+  $('ebayBdNet').textContent = fm(bd.net);
+
+  // Sync active scenario if user edits the number manually
+  if (_ebayCurrentCard) {
+    const rounded = Math.round(target);
+    if (rounded === Math.round(_ebayCurrentCard.val) && _ebayScenario !== 'market') {
+      ['ebayScnMarket','ebayScnFloor','ebayScnCustom'].forEach(id => $(id).classList.remove('active'));
+      $('ebayScnMarket').classList.add('active');
+      _ebayScenario = 'market';
+    } else if (_ebayCurrentCard.floorPrice > 0 && rounded === Math.round(_ebayCurrentCard.floorPrice) && _ebayScenario !== 'floor') {
+      ['ebayScnMarket','ebayScnFloor','ebayScnCustom'].forEach(id => $(id).classList.remove('active'));
+      $('ebayScnFloor').classList.add('active');
+      _ebayScenario = 'floor';
+    } else if (rounded !== Math.round(_ebayCurrentCard.val) && !(rounded === Math.round(_ebayCurrentCard.floorPrice)) && _ebayScenario !== 'custom') {
+      ['ebayScnMarket','ebayScnFloor','ebayScnCustom'].forEach(id => $(id).classList.remove('active'));
+      $('ebayScnCustom').classList.add('active');
+      _ebayScenario = 'custom';
+    }
+  }
+}
+
+/** Re-render cards in view after settings change so inline ask prices update */
+function refreshCardAskPrices() {
+  // Query all cards currently visible with ask-price element and update them
+  document.querySelectorAll('.c').forEach(el => {
+    const key = el.dataset.cardkey;
+    if (!key) return;
+    const allCards = [...saleCards, ...collCards];
+    const card = allCards.find(c => `${c.pl}|${c.yr}|${c.st}|${c.num}|${c.slab}` === decodeURIComponent(key));
+    if (!card || !(card.val > 0)) return;
+    const askEl = el.querySelector('.c-ebay-ask');
+    if (askEl) askEl.textContent = fm(calcEbayAskPrice(card.val));
+  });
+}
+
+// Close ebay modal on escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && $('ebayModal').classList.contains('open')) closeEbayCalc();
+});
+
+load();
+</script>
+</body>
+</html>
